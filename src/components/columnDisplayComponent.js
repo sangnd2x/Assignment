@@ -11,8 +11,6 @@ class ColumnDisplay extends Component {
             staffs: STAFFS,
             numberOfColumn: 3
         };
-
-        // this.handleOption = this.handleOption.bind(this)
     }
 
     handleOption(e) {
@@ -42,7 +40,7 @@ class ColumnDisplay extends Component {
                     <StaffList column={this.state.numberOfColumn} staff={this.state.staffs} />
                 </div>
             </div>
-        )
+        );
     }
 }
 

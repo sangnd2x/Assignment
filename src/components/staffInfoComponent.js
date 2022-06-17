@@ -10,7 +10,6 @@ class StaffInfo extends Component{
     render() {
         const staff = this.props.selectedStaff;
 
-
         if (staff == null) {
             return (
                 <div></div>
