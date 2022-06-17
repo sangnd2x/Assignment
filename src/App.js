@@ -3,15 +3,13 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 import './App.css';
 import { STAFFS } from './staffs';
 import StaffList from './components/staffListComponent';
+import ColumnDisplay from './components/columnDisplayComponent';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      staffs: STAFFS
-    }
   }
   
   render() {
@@ -22,7 +20,7 @@ class App extends Component {
             <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
           </div>
         </Navbar>
-        <StaffList staff={this.state.staffs} />
+        <ColumnDisplay />
       </div>
     );
   }
