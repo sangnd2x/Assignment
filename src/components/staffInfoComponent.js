@@ -22,7 +22,7 @@ class StaffInfo extends Component{
             return (
                 <div className="container">
                     <div className="row">
-                        <Card className="col-12 col-md-6 col-lg-4">
+                        <Card className="col-12 col-md-12 col-lg-12 staff-info">
                             <CardTitle>{staff.name}</CardTitle>
                             <CardText>Ngày sinh: {dateFormat(birdthDate, "dd/mm/yyyy")}</CardText>
                             <CardText>Ngày vào công ty: {dateFormat(joinDate, "dd/mm/yyyy")}</CardText>
