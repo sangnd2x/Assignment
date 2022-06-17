@@ -1,4 +1,3 @@
-import { number } from "prop-types";
 import React, { Component } from "react";
 import StaffList from "./staffListComponent";
 import { STAFFS } from "../staffs";

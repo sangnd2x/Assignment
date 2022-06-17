@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import './App.css';
-import { STAFFS } from './staffs';
-import StaffList from './components/staffListComponent';
 import ColumnDisplay from './components/columnDisplayComponent';
 
 

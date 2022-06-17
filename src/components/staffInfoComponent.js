@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Card, CardTitle, CardText, CardImg } from "reactstrap"
-import dateFormat, { masks } from "dateformat";
+import { Card, CardTitle, CardText } from "reactstrap"
+import dateFormat from "dateformat";
 
 class StaffInfo extends Component{
     constructor(props) {
