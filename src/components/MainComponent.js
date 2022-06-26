@@ -8,6 +8,7 @@ import { STAFFS } from '../staffs';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import ColumnDisplay from './ColumnDisplayComponent';
 import StaffInfo from './StaffInfoComponent';
+import Salary from './SalaryComponent';
 
 class Main extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class Main extends Component {
                     <Route exact path="/nhan-vien" component={() => <StaffList staff={this.state.staffs} column={this.state.numberOfColumn} />} />
                     <Route path="/nhan-vien/:staffId" component={StaffDetail} />
                     <Route path="/phong-ban" component={() => <Department department={this.state.departments} column={this.state.numberOfColumn} />} />
-                    <Route path="bang-luong" />
+                    <Route path="/bang-luong" component={() => <Salary staff={this.state.staffs} column={this.state.numberOfColumn}/>} />
                     <Redirect to="/nhan-vien" />
                 </Switch>
             </div>

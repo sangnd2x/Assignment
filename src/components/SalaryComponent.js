@@ -1,14 +1,12 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Card, CardBody, CardTitle, CardImg, Breadcrumb, BreadcrumbItem, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
 
-
-class StaffList extends Component {
+class Salary extends Component {
     constructor(props) {
-        super(props);
+        super(props); 
 
     }
-
 
     render() {
         const staff = this.props.staff.map(staff => {
@@ -17,8 +15,11 @@ class StaffList extends Component {
                     <div >
                         <Link to={`/nhan-vien/${staff.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
                             <CardBody className="staff">
-                                <CardImg width="220" height="220" src={staff.image} alt={staff.name} />
-                                <CardText style={{textDecoration: "none", color: "FF0000", paddingTop: "10px"}}>{staff.name}</CardText>
+                                <CardTitle>{staff.name}</CardTitle>
+                                <CardText>Mã nhân viên: {staff.id}</CardText>
+                                <CardText>Hệ số lương: {staff.salaryScale}</CardText>
+                                <CardText>Số ngày làm thêm: {staff.overTime}</CardText>
+                                <CardText>Lương: {staff.overTime * 2000000 + staff.salaryScale * 3000000}</CardText>
                             </CardBody>
                         </Link>
                     </div>
@@ -31,12 +32,12 @@ class StaffList extends Component {
                 <div className="row">
                     <Breadcrumb>
                         <BreadcrumbItem>
-                            <Link to="/home">Trang chủ</Link>
+                            <Link to="/home">Trang Chủ</Link>
                         </BreadcrumbItem>
-                        <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
+                        <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
-                        <h3>Nhân Viên</h3>
+                        <h3>Bảng Lương</h3>
                     </div>
                 </div>
                 <div className="row">
@@ -47,4 +48,4 @@ class StaffList extends Component {
     }
 }
 
-export default StaffList;
+export default Salary;

@@ -34,7 +34,7 @@ class StaffInfo extends Component{
                 </div>
                     <div className="row">
                         <Card className="col-12 col-md-12 col-lg-12">
-                            <CardBody className="staff-info">
+                            <CardBody className="col-12 col-md-12 col-lg-12 staff-info">
                                 <div className="staff-details">
                                     <CardText><span>Ngày sinh:</span> {dateFormat(birdthDate, "dd/mm/yyyy")}</CardText>
                                     <CardText><span>Ngày vào công ty:</span> {dateFormat(joinDate, "dd/mm/yyyy")}</CardText>
