@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import Main from './components/MainComponent';
 import './App.css';
-import ColumnDisplay from './components/columnDisplayComponent';
+import { BrowserRouter } from 'react-router-dom';
 
 
 class App extends Component {
@@ -12,14 +12,11 @@ class App extends Component {
   
   render() {
     return (
-      <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
-          </div>
-        </Navbar>
-        <ColumnDisplay />
-      </div>
+      <BrowserRouter>
+        <div>
+          <Main />
+        </div>
+      </BrowserRouter>
     );
   }
 }

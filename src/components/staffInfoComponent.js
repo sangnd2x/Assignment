@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Card, CardTitle, CardText } from "reactstrap"
+import { Card, CardTitle, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem } from "reactstrap"
 import dateFormat from "dateformat";
+import { Link } from "react-router-dom";
 
 class StaffInfo extends Component{
     constructor(props) {
@@ -21,13 +22,30 @@ class StaffInfo extends Component{
             return (
                 <div className="container">
                     <div className="row">
-                        <Card className="col-12 col-md-12 col-lg-12 staff-info">
-                            <CardTitle>{staff.name}</CardTitle>
-                            <CardText>Ngày sinh: {dateFormat(birdthDate, "dd/mm/yyyy")}</CardText>
-                            <CardText>Ngày vào công ty: {dateFormat(joinDate, "dd/mm/yyyy")}</CardText>
-                            <CardText>Phòng ban: {staff.department.name}</CardText>
-                            <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
-                            <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to="/home">Nhân Viên</Link>
+                        </BreadcrumbItem>
+                            <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{staff.name}</h3>
+                    </div>
+                </div>
+                    <div className="row">
+                        <Card className="col-12 col-md-12 col-lg-12">
+                            <CardBody className="staff-info">
+                                <div className="staff-details">
+                                    <CardText><span>Ngày sinh:</span> {dateFormat(birdthDate, "dd/mm/yyyy")}</CardText>
+                                    <CardText><span>Ngày vào công ty:</span> {dateFormat(joinDate, "dd/mm/yyyy")}</CardText>
+                                    <CardText><span>Phòng ban:</span> {staff.department.name}</CardText>
+                                    <CardText><span>Số ngày nghỉ còn lại:</span> {staff.annualLeave}</CardText>
+                                    <CardText><span>Số ngày đã làm thêm:</span> {staff.overTime}</CardText>
+                                </div>
+                                <div className="staff-img">
+                                    <CardImg width="350" height="350" src={staff.image} alt={staff.name}/>
+                                </div>
+                            </CardBody>
                         </Card>
                     </div>
                 </div>

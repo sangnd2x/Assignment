@@ -1,9 +1,12 @@
-.staff {
+.staff, .dept {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-items: center;
-  box-shadow: 7px 7px 5px lightgray;
-  margin-top: 10px;
+  width: 295px;
+  height: 295px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 20px;
   border: 0.5px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -16,9 +19,28 @@
 }
 
 .staff-info {
-  padding: 25px;
+  /* padding: 25px;
   margin-top: 20px;
-  box-shadow: 0px 0px 19px 5px lightgray;
+  box-shadow: 0px 0px 19px 5px lightgray; */
+  display: flex;
+  position: absolute;
+  width: 925px;
+  height: 713px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.staff-details{
+padding: 20px;
+
+}
+
+.staff-img {
+  padding-left: 80px;
+  border-radius: 25px;
+}
+
+span {
+  font-weight: bold;
 }
 
 label {
@@ -28,3 +50,8 @@ label {
 select {
   margin-left: 10px;
 }
+
+.nav-bar {
+  background-color: lightgreen;
+}
+
