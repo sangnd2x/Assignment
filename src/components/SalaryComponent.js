@@ -13,7 +13,7 @@ class Salary extends Component {
             return (
                 <div key={staff.id} className={"col-12" + " " + "col-md-" + (12/this.props.column) + " " + "col-lg-" + (12/this.props.column)}>
                     <div >
-                        <Link to={`/nhan-vien/${staff.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
+                        <Link to={`/staffs/${staff.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
                             <CardBody className="staff">
                                 <CardTitle>{staff.name}</CardTitle>
                                 <CardText>Mã nhân viên: {staff.id}</CardText>
@@ -34,7 +34,7 @@ class Salary extends Component {
                 <div className="row">
                     <Breadcrumb className="breadcrumb">
                         <BreadcrumbItem>
-                            <Link to="/home">Trang Chủ</Link>
+                            <Link to="/staffs">Trang Chủ</Link>
                         </BreadcrumbItem>
                         <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
                     </Breadcrumb>

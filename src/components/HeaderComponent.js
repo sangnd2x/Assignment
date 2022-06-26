@@ -24,22 +24,22 @@ class Header extends Component {
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className="mr-auto" href="/">
-                            <img src="assets/images/logo.png" height="30" width="41" alt="Admin" />
+                            <img src="assets/images/bizlogo.png" height="30" width="41" alt="Admin" />
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen}  navbar>
                         <Nav navbar>
                             <NavItem>
-                                <NavLink className="nav-link" to="/nhan-vien">
+                                <NavLink className="nav-link" to="/staffs">
                                     Nhân Viên
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/phong-ban">
+                                <NavLink className="nav-link" to="/departments">
                                     Phòng Ban
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/bang-luong">
+                                <NavLink className="nav-link" to="/salaries">
                                     Bảng Lương
                                 </NavLink>
                             </NavItem>

@@ -24,7 +24,7 @@ class StaffInfo extends Component{
                     <div className="row">
                         <Breadcrumb className="breadcrumb">
                             <BreadcrumbItem>
-                                <Link to="/home">Nhân Viên</Link>
+                                <Link to="/staffs">Nhân Viên</Link>
                             </BreadcrumbItem>
                                 <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
                         </Breadcrumb>
@@ -34,16 +34,16 @@ class StaffInfo extends Component{
                     </div>
                     <div className="row">
                         <Card className="col-12 col-md-12 col-lg-12">
-                            <CardBody className="col-12 col-md-12 col-lg-12 staff-info">
-                                <div className="staff-details">
+                            <CardBody className="row">
+                                <div className="col-lg-3 col-md-4 col-12">
+                                    <CardImg width="250" height="250" src={staff.image} alt={staff.name}/>
+                                </div>
+                                <div className="col-lg-9 col-md-8 col-12">
                                     <CardText><span>Ngày sinh:</span> {dateFormat(birdthDate, "dd/mm/yyyy")}</CardText>
                                     <CardText><span>Ngày vào công ty:</span> {dateFormat(joinDate, "dd/mm/yyyy")}</CardText>
                                     <CardText><span>Phòng ban:</span> {staff.department.name}</CardText>
                                     <CardText><span>Số ngày nghỉ còn lại:</span> {staff.annualLeave}</CardText>
                                     <CardText><span>Số ngày đã làm thêm:</span> {staff.overTime}</CardText>
-                                </div>
-                                <div className="staff-img">
-                                    <CardImg width="350" height="350" src={staff.image} alt={staff.name}/>
                                 </div>
                             </CardBody>
                         </Card>

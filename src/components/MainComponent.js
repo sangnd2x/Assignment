@@ -42,11 +42,11 @@ class Main extends Component {
                 <Header />
                 <ColumnDisplay onChange={(e) => this.handleOption(e)} />
                 <Switch>
-                    <Route exact path="/nhan-vien" component={() => <StaffList staff={this.state.staffs} column={this.state.numberOfColumn} />} />
-                    <Route path="/nhan-vien/:staffId" component={StaffDetail} />
-                    <Route path="/phong-ban" component={() => <Department department={this.state.departments} column={this.state.numberOfColumn} />} />
-                    <Route path="/bang-luong" component={() => <Salary staff={this.state.staffs} column={this.state.numberOfColumn}/>} />
-                    <Redirect to="/nhan-vien" />
+                    <Route exact path="/staffs" component={() => <StaffList staff={this.state.staffs} column={this.state.numberOfColumn} />} />
+                    <Route path="/staffs/:staffId" component={StaffDetail} />
+                    <Route path="/departments" component={() => <Department department={this.state.departments} column={this.state.numberOfColumn} />} />
+                    <Route path="/salaries" component={() => <Salary staff={this.state.staffs} column={this.state.numberOfColumn}/>} />
+                    <Redirect to="/staffs" />
                 </Switch>
             </div>
         );

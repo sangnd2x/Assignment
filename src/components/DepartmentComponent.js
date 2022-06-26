@@ -27,7 +27,7 @@ class Department extends Component {
                 <div className="row">
                     <Breadcrumb className="breadcrumb">
                         <BreadcrumbItem>
-                            <Link to="/home">Trang chủ</Link>
+                            <Link to="/staffs">Trang chủ</Link>
                         </BreadcrumbItem>
                         <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
                     </Breadcrumb>
