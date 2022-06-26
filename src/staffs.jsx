@@ -3,27 +3,32 @@ export const DEPARTMENTS =
         {
             id: "Dept01",
             name: "Sale",
-            numberOfStaff: 1
+            numberOfStaff: 1,
+            icon: "fa fa-money fa-lg"
         },
         {
             id: "Dept02",
             name: "HR",
-            numberOfStaff: 3
+            numberOfStaff: 3,
+            icon: "fa fa-users fa-lg"
         },
         {
             id: "Dept03",
             name: "Marketing",
-            numberOfStaff: 2
+            numberOfStaff: 2,
+            icon: "fa fa-area-chart fa-lg"
         },
         {
             id: "Dept04",
             name: "IT",
-            numberOfStaff: 1
+            numberOfStaff: 1,
+            icon: "fa fa-laptop fa-lg"
         },
         {
             id: "Dept05",
             name: "Finance",
-            numberOfStaff: 11
+            numberOfStaff: 11,
+            icon: "fa fa-briefcase fa-lg"
         }
     ]
 export const ROLE = {

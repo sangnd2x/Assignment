@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import StaffList from "./StaffListComponent";
-import { STAFFS } from "../staffs";
 
 class ColumnDisplay extends Component {
 
     render() {
         const btn = 
-           
                 <div className="row my-3 justify-content-flexstart">
                     <div>
                         <label htmlFor="dropdown">Số cột: </label>

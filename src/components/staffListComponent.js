@@ -31,7 +31,7 @@ class StaffList extends Component {
                 <div className="row">
                     <Breadcrumb className="breadcrumb">
                         <BreadcrumbItem>
-                            <Link to="/home">Trang chủ</Link>
+                            <Link to="/home" >Trang chủ</Link>
                         </BreadcrumbItem>
                         <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
                     </Breadcrumb>

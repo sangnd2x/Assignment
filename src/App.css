@@ -45,6 +45,10 @@
   border: 0.5px solid rgba(0, 0, 0, 0.1);
 }
 
+.dept-icon {
+  margin-bottom: 20px;
+}
+
 @media only screen and (max-width: 980) {
 
   .staff-img, .staff-details {
@@ -75,12 +79,15 @@ select {
 }
 
 .nav-bar {
-  background-color: lightgreen;
+  background-color: rgba(39, 174, 96, 0.5);
+}
+
+.nav-link {
+  color: #2c3e50;
 }
 
 .salary {
   display: grid;
-  background-color: green;
   width: 200px;
   height: 40px;
   place-items: center;
