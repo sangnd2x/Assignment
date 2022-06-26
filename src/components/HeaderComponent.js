@@ -11,7 +11,7 @@ class Header extends Component {
         this.state = {
             isNavOpen: false,
             query: '',
-
+            staffs: STAFFS
         };
 
         this.toggleNav = this.toggleNav.bind(this);
@@ -26,7 +26,7 @@ class Header extends Component {
     }
 
     getQuery(e) {
-        e.preventDefault();
+
         this.setState({ query: e.target.value });
         console.log(this.state.query);
     }
@@ -59,8 +59,12 @@ class Header extends Component {
                             </NavItem>    
                             <NavItem>
                                 <Form className="search-bar" onSubmit={(e) => this.getQuery(e)}>
-                                    <Input type="text" placeholder="Nhập tên nhân viên...." onChange={(e) => this.getQuery(e)}/>    
-                                    <Button type="submit" className="fa fa-search"></Button>
+                                    <Input type="text" placeholder="Nhập tên nhân viên...." onChange={(e) => this.getQuery(e)} />
+                                        <Link to={`/staffs/${(this.state.staffs.map(staff => {
+                                            if (staff.name.includes(this.state.query)) return staff.id
+                                        }))[0]}`}>
+                                        <Button type="submit" className="fa fa-search"></Button>  
+                                        </Link>
                                 </Form>
                             </NavItem>
                         </Nav>
