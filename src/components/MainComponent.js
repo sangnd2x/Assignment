@@ -9,6 +9,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import ColumnDisplay from './ColumnDisplayComponent';
 import StaffInfo from './StaffInfoComponent';
 import Salary from './SalaryComponent';
+import StaffSearchResult from './StaffSearchResultComponent';
 
 class Main extends Component {
     constructor(props) {
@@ -37,13 +38,20 @@ class Main extends Component {
             );
         }
 
+        const StaffQuery = ({ match }) => {
+            return (
+                <StaffSearchResult staffResult={this.state.staffs.filter(staff => staff.name === match.params.staffName)[0]} />
+            );
+        }
+
         return (
             <div>
                 <Header />
-                <ColumnDisplay onChange={(e) => this.handleOption(e)} />
+                <ColumnDisplay onClick={(e) => this.handleOption(e)} />
                 <Switch>
                     <Route exact path="/staffs" component={() => <StaffList staff={this.state.staffs} column={this.state.numberOfColumn} />} />
                     <Route path="/staffs/:staffId" component={StaffDetail} />
+                    <Route path="/staffs/:staffName" component={StaffQuery} />
                     <Route path="/departments" component={() => <Department department={this.state.departments} column={this.state.numberOfColumn} />} />
                     <Route path="/salaries" component={() => <Salary staff={this.state.staffs} column={this.state.numberOfColumn}/>} />
                     <Redirect to="/staffs" />

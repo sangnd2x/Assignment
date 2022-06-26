@@ -1,26 +1,40 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, Collapse, NavItem, NavbarToggler, Nav } from "reactstrap";
-import { NavLink  } from "react-router-dom";
+import { Navbar, NavbarBrand, Collapse, NavItem, NavbarToggler, Nav, Form, Input, Button, FormGroup } from "reactstrap";
+import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { STAFFS } from "../staffs";
 
 class Header extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            isNavOpen: false
+            isNavOpen: false,
+            query: '',
+
         };
 
         this.toggleNav = this.toggleNav.bind(this);
+
+        this.getQuery = this.getQuery.bind(this);
     }
 
     toggleNav() {
-        this.setState({ isNavOpen: !this.isNavOpen });
+        this.setState({
+            isNavOpen: !this.state.isNavOpen
+        });
+    }
+
+    getQuery(e) {
+        e.preventDefault();
+        this.setState({ query: e.target.value });
+        console.log(this.state.query);
     }
 
     render() {
         return (
             <React.Fragment>
-                <Navbar className="nav-bar" expand="md">
+                <Navbar light className="nav-bar" expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className="mr-auto" href="/">
@@ -42,6 +56,12 @@ class Header extends Component {
                                 <NavLink className="nav-link" to="/salaries">
                                     Bảng Lương
                                 </NavLink>
+                            </NavItem>    
+                            <NavItem>
+                                <Form className="search-bar" onSubmit={(e) => this.getQuery(e)}>
+                                    <Input type="text" placeholder="Nhập tên nhân viên...." onChange={(e) => this.getQuery(e)}/>    
+                                    <Button type="submit" className="fa fa-search"></Button>
+                                </Form>
                             </NavItem>
                         </Nav>
                         </Collapse>
