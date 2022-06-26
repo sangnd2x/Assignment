@@ -18,7 +18,7 @@ class StaffList extends Component {
                         <Link to={`/nhan-vien/${staff.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
                             <CardBody className="staff">
                                 <CardImg width="220" height="220" src={staff.image} alt={staff.name} />
-                                <CardText style={{textDecoration: "none", color: "FF0000", paddingTop: "10px"}}>{staff.name}</CardText>
+                                <CardText><span>{staff.name}</span></CardText>
                             </CardBody>
                         </Link>
                     </div>
@@ -29,7 +29,7 @@ class StaffList extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Breadcrumb>
+                    <Breadcrumb className="breadcrumb">
                         <BreadcrumbItem>
                             <Link to="/home">Trang chủ</Link>
                         </BreadcrumbItem>

@@ -19,7 +19,9 @@ class Salary extends Component {
                                 <CardText>Mã nhân viên: {staff.id}</CardText>
                                 <CardText>Hệ số lương: {staff.salaryScale}</CardText>
                                 <CardText>Số ngày làm thêm: {staff.overTime}</CardText>
-                                <CardText>Lương: {staff.overTime * 2000000 + staff.salaryScale * 3000000}</CardText>
+                                <div className="salaray">
+                                    <CardText className="salary">Lương: {staff.overTime * 2000000 + staff.salaryScale * 3000000}</CardText>
+                                </div>
                             </CardBody>
                         </Link>
                     </div>
@@ -30,7 +32,7 @@ class Salary extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Breadcrumb>
+                    <Breadcrumb className="breadcrumb">
                         <BreadcrumbItem>
                             <Link to="/home">Trang Chủ</Link>
                         </BreadcrumbItem>

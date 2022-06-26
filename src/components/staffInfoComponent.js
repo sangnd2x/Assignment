@@ -22,16 +22,16 @@ class StaffInfo extends Component{
             return (
                 <div className="container">
                     <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem>
-                            <Link to="/home">Nhân Viên</Link>
-                        </BreadcrumbItem>
-                            <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h3>{staff.name}</h3>
+                        <Breadcrumb className="breadcrumb">
+                            <BreadcrumbItem>
+                                <Link to="/home">Nhân Viên</Link>
+                            </BreadcrumbItem>
+                                <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>{staff.name}</h3>
+                        </div>
                     </div>
-                </div>
                     <div className="row">
                         <Card className="col-12 col-md-12 col-lg-12">
                             <CardBody className="col-12 col-md-12 col-lg-12 staff-info">
@@ -51,7 +51,6 @@ class StaffInfo extends Component{
                 </div>
             );
         }
-
     }
 }
 

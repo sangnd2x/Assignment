@@ -24,7 +24,7 @@ class Department extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Breadcrumb>
+                    <Breadcrumb className="breadcrumb">
                         <BreadcrumbItem>
                             <Link to="/home">Trang chủ</Link>
                         </BreadcrumbItem>
