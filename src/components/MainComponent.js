@@ -9,6 +9,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import ColumnDisplay from './ColumnDisplayComponent';
 import StaffInfo from './StaffInfoComponent';
 import Salary from './SalaryComponent';
+import SearchBar from './SearchBarComponent';
 
 
 class Main extends Component {
@@ -44,6 +45,7 @@ class Main extends Component {
             <div>
                 <Header />
                 <ColumnDisplay onClick={(e) => this.handleOption(e)} />
+                <SearchBar />
                 <Switch>
                     <Route exact path="/staffs" component={() => <StaffList staff={this.state.staffs} column={this.state.numberOfColumn} />} />
                     <Route path="/staffs/:staffId" component={StaffDetail} />

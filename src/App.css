@@ -98,4 +98,7 @@ select {
 
 .search-bar {
   display: flex;
+  float: right;
+  margin-top: -25px;
+  z-index: 1;
 }

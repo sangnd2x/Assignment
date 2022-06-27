@@ -9,14 +9,11 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            isNavOpen: false,
-            query: '',
-            staffs: STAFFS
+            isNavOpen: false
         };
 
         this.toggleNav = this.toggleNav.bind(this);
 
-        this.getQuery = this.getQuery.bind(this);
     }
 
     toggleNav() {
@@ -25,12 +22,7 @@ class Header extends Component {
         });
     }
 
-    getQuery(e) {
-
-        this.setState({ query: e.target.value });
-        console.log(this.state.query);
-    }
-
+    
     render() {
         return (
             <React.Fragment>
@@ -57,16 +49,6 @@ class Header extends Component {
                                     Bảng Lương
                                 </NavLink>
                             </NavItem>    
-                            <NavItem>
-                                <Form className="search-bar" onSubmit={(e) => this.getQuery(e)}>
-                                    <Input type="text" placeholder="Nhập tên nhân viên...." onChange={(e) => this.getQuery(e)} />
-                                        <Link to={`/staffs/${(this.state.staffs.map(staff => {
-                                            if (staff.name.includes(this.state.query)) return staff.id
-                                        }))[0]}`}>
-                                        <Button type="submit" className="fa fa-search"></Button>  
-                                        </Link>
-                                </Form>
-                            </NavItem>
                         </Nav>
                         </Collapse>
                     </div>
