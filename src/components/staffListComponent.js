@@ -2,14 +2,10 @@ import React, {Component} from "react";
 import { Card, CardBody, CardTitle, CardImg, Breadcrumb, BreadcrumbItem, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
 import AddStaff from "./AddStaffComponent";
+import SearchBar from "./SearchBarComponent";
 
 
 class StaffList extends Component {
-    constructor(props) {
-        super(props);
-
-    }
-
 
     render() {
         const staff = this.props.staff.map(staff => {
@@ -40,6 +36,9 @@ class StaffList extends Component {
                     </div>
                     <div className="col">
                         <AddStaff dept={this.props.dept} />
+                    </div>
+                    <div>
+                        <SearchBar />
                     </div>
                     <div className="col-12">
                         <h3>Nhân Viên</h3>

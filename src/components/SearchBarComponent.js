@@ -10,14 +10,22 @@ class SearchBar extends Component {
     constructor(props) {
         super(props);
 
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        alert(this.name.value);
     }
 
     render() {
         return (
-        <LocalForm className="search-bar">
-            <Control.text model="text" placeholder="Nhập tên nhân viên...." />
-            <Button type="submit" color="primary">Tìm</Button>  
-        </LocalForm>
+            <Form onSubmit={(e) => this.handleSubmit(e)}>
+                <FormGroup className="search-bar">
+                    <Input type="text" placeholder="Nhập tên nhân viên...." innerRef={input => this.name = input} />
+                    <Button type="submit" color="primary">Tìm</Button>
+                </FormGroup>  
+            </Form>
         );
     }
 }

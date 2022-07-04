@@ -43,7 +43,6 @@ class Main extends Component {
             <div>
                 <Header />
                 <ColumnDisplay onClick={(e) => this.handleOption(e)} />
-                <SearchBar />
                 <Switch>
                     <Route exact path="/staffs" component={() => <StaffList dept={this.props.departments}  staff={this.props.staffs} column={this.props.numberOfColumn} />} />
                     <Route path="/staffs/:staffId" component={StaffDetail} />
