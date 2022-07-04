@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, Collapse, NavItem, NavbarToggler, Nav, Form, Input, Button, FormGroup } from "reactstrap";
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { STAFFS } from "../staffs";
-import { Control, LocalForm, Errors } from "react-redux-form";
-
+import { Form, Input, Button, FormGroup } from "reactstrap";
 
 class SearchBar extends Component {
     constructor(props) {

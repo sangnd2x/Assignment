@@ -6,8 +6,6 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import ColumnDisplay from './ColumnDisplayComponent';
 import StaffInfo from './StaffInfoComponent';
 import Salary from './SalaryComponent';
-import SearchBar from './SearchBarComponent';
-import AddStaff from './AddStaffComponent';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {

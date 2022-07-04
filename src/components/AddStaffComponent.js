@@ -27,7 +27,7 @@ class AddStaff extends Component {
         return (
             <div className="container">
                 <div className="row add-staff">
-                    <Button type="submit" value="submit" color="primary" onClick={this.toggleForm}>+</Button>
+                    <Button type="submit" value="submit" color="primary" onClick={this.toggleForm}><strong>+</strong></Button>
                     <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} >
                         <ModalHeader toggle={this.toggleForm}>Thêm Nhân Viên</ModalHeader>
                         <ModalBody className="col-12 col-md-12">
