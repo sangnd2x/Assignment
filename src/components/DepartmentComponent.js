@@ -1,12 +1,9 @@
 import React, {Component} from "react";
-import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Department extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+    
     render() {
         const department = this.props.department.map(dept => {
             return (

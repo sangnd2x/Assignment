@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardTitle, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem } from "reactstrap"
+import { Card, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem } from "reactstrap"
 import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
 

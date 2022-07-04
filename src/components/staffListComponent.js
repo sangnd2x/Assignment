@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Card, CardBody, CardTitle, CardImg, Breadcrumb, BreadcrumbItem, CardText } from "reactstrap";
+import { CardBody, CardImg, Breadcrumb, BreadcrumbItem, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
 import AddStaff from "./AddStaffComponent";
 import SearchBar from "./SearchBarComponent";
