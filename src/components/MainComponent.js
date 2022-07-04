@@ -7,6 +7,7 @@ import ColumnDisplay from './ColumnDisplayComponent';
 import StaffInfo from './StaffInfoComponent';
 import Salary from './SalaryComponent';
 import SearchBar from './SearchBarComponent';
+import AddStaff from './AddStaffComponent';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
@@ -38,15 +39,13 @@ class Main extends Component {
             );
         }
 
-
-
         return (
             <div>
                 <Header />
                 <ColumnDisplay onClick={(e) => this.handleOption(e)} />
                 <SearchBar />
                 <Switch>
-                    <Route exact path="/staffs" component={() => <StaffList staff={this.props.staffs} column={this.props.numberOfColumn} />} />
+                    <Route exact path="/staffs" component={() => <StaffList dept={this.props.departments}  staff={this.props.staffs} column={this.props.numberOfColumn} />} />
                     <Route path="/staffs/:staffId" component={StaffDetail} />
                     <Route path="/departments" component={() => <Department department={this.props.departments} column={this.props.numberOfColumn} />} />
                     <Route path="/salaries" component={() => <Salary staff={this.props.staffs} column={this.props.numberOfColumn}/>} />

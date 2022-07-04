@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Card, CardBody, CardTitle, CardImg, Breadcrumb, BreadcrumbItem, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
+import AddStaff from "./AddStaffComponent";
 
 
 class StaffList extends Component {
@@ -29,12 +30,17 @@ class StaffList extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Breadcrumb className="breadcrumb">
-                        <BreadcrumbItem>
-                            <Link to="/staffs" >Trang chủ</Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
-                    </Breadcrumb>
+                    <div className="col-4">
+                        <Breadcrumb className="breadcrumb">
+                            <BreadcrumbItem>
+                                <Link to="/staffs" >Trang chủ</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
+                        </Breadcrumb>
+                    </div>
+                    <div className="col">
+                        <AddStaff dept={this.props.dept} />
+                    </div>
                     <div className="col-12">
                         <h3>Nhân Viên</h3>
                     </div>
