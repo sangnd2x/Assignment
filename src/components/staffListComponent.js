@@ -12,7 +12,7 @@ class StaffList extends Component {
             staffs: this.props.staffs
         }
         this.onChange = this.onChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     onChange(e) {
@@ -21,13 +21,14 @@ class StaffList extends Component {
         })
     }
 
-    handleSubmit(e) {
+    handleSearch(e) {
         e.preventDefault();
         const foundStaff = this.props.staffs.filter(staff => staff.name.toLowerCase().includes(this.state.query));
         this.setState({
             staffs: foundStaff
         });  
     }
+
 
     render() {        
         const staff = this.state.staffs.map(staff => {
@@ -60,7 +61,7 @@ class StaffList extends Component {
                         <AddStaff dept={this.props.dept} />
                     </div>
                     <div>
-                        <Form onSubmit={(e) => this.handleSubmit(e)}>
+                        <Form onSubmit={(e) => this.handleSearch(e)}>
                             <FormGroup className="search-bar">
                                 <Input type="text" placeholder="Nhập tên nhân viên...."
                                     innerRef={input => this.name = input}

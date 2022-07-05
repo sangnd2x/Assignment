@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { connect } from "react-redux";
+import { addStaff } from "../actions/search";
 
 class AddStaff extends Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            isFormOpen: false
+            isFormOpen: false,
+            newStaff: {}
         };
 
         this.toggleForm = this.toggleForm.bind(this);
@@ -20,7 +23,7 @@ class AddStaff extends Component {
 
     handleSubmit(value) {
         this.toggleForm();
-        alert("Current State: " + JSON.stringify(value));
+        console.log(value)
     }
 
     render() {
@@ -31,7 +34,7 @@ class AddStaff extends Component {
                     <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} >
                         <ModalHeader toggle={this.toggleForm}>Thêm Nhân Viên</ModalHeader>
                         <ModalBody className="col-12 col-md-12">
-                            <LocalForm onSubmit={value => this.handleSubmit(value)} >
+                            <LocalForm  onSubmit={value => this.handleSubmit(value)}>
                                 <Row className="form-group">
                                     <Label htmlFor="name" className="col-md-3">Tên</Label>
                                     <Col className="col-md-8">
@@ -41,39 +44,53 @@ class AddStaff extends Component {
                                 <Row className="form-group">
                                     <Label htmlFor="dob" className="col-md-3">Ngày sinh</Label>
                                     <Col className="col-md-8">
-                                        <Control type="date" model=".dob" name="dob" className="form-control"/>
+                                        <Control type="date" model=".dob" name="dob" className="form-control"
+                                            value={this.state.tenState}
+                                            onChange={this.onChange}
+                                        />
                                     </Col>  
                                 </Row>
                                 <Row className="form-group">
-                                    <Label htmlFor="joinDate" className="col-md-3">Ngày vào công ty</Label>
+                                    <Label htmlFor="startDate" className="col-md-3">Ngày vào công ty</Label>
                                     <Col className="col-md-8">
-                                        <Control type="date" model=".joinDate" name="joinDate" className="form-control"/>
+                                        <Control type="date" model=".startDate" name="startDate" className="form-control"
+                                            value={this.state.tenState}
+                                            onChange={this.onChange}
+                                        />
                                     </Col>  
                                 </Row>
                                 <Row className="form-group">
                                     <Label htmlFor="department" className="col-md-3">Phòng ban</Label>
                                     <Col className="col-md-8">
-                                        <Control.select model=".department" name="department" className="form-control">
-                                            {this.props.dept.map(dept => <option key={dept.id}>{dept.name}</option>)}
+                                        <Control.select model=".department" name="department" className="form-control"
+                                            onChange={this.onChange}
+                                        >
+                                            {this.props.departments.map(dept => <option key={dept.id}>{dept.name}</option>)}
                                         </Control.select>
                                     </Col>  
                                 </Row>
                                 <Row className="form-group">
                                     <Label htmlFor="salaryScale" className="col-md-3">Hệ số lương</Label>
                                     <Col className="col-md-8">
-                                        <Control.text model=".salaryScale" name="salaryScale" className="form-control"/>
+                                        <Control.text model=".salaryScale" name="salaryScale" className="form-control"
+                                            onChange={this.onChange}
+                                        />
                                     </Col>  
                                 </Row>
                                 <Row className="form-group">
                                     <Label htmlFor="annualLeave"className="col-md-3">Số ngày nghỉ còn lại</Label>
                                     <Col className="col-md-8">
-                                        <Control.text model=".annualLeave" name="annualLeave" className="form-control"/>
+                                        <Control.text model=".annualLeave" name="annualLeave" className="form-control"
+                                            onChange={this.onChange}
+                                        />
                                     </Col>  
                                 </Row>
                                 <Row className="form-group">
                                     <Label htmlFor="overTime" className="col-md-3">Số ngày đã làm thêm</Label>
                                     <Col className="col-md-8">
-                                        <Control.text model=".overTime" name="overTime" className="form-control"/>
+                                        <Control.text model=".overTime" name="overTime" className="form-control"
+                                            onChange={this.onChange}
+                                        />
                                     </Col>  
                                 </Row>
                                 <Row className="form-group">
@@ -90,4 +107,9 @@ class AddStaff extends Component {
     }
 }
 
-export default AddStaff;
+const mapStateToProps = state => ({
+    staffs: state.staffs,
+    departments: state.departments
+});
+
+export default connect(mapStateToProps, { addStaff })(AddStaff);

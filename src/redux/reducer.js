@@ -1,6 +1,7 @@
 import { DEPARTMENTS } from '../staffs';
 import { ROLE } from '../staffs';
 import { STAFFS } from '../staffs';
+import { ADD_STAFF } from '../actions/types';
 
 export const initialState = {
     departments: DEPARTMENTS,
@@ -10,5 +11,12 @@ export const initialState = {
 };
 
 export const Reducer = (state = initialState, action) => {
-    return state;
+    switch (action.type) {
+        case ADD_STAFF:
+            return {
+                staffs: [...state.staffs, action.payload]
+            }
+        default:
+            return state;
+    }
 }
