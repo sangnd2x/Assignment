@@ -7,7 +7,7 @@ class ColumnDisplay extends Component {
                 <div className="row my-3 justify-content-flexstart">
                     <div>
                         <label htmlFor="dropdown">Số cột: </label>
-                        <select id="dropdown" onChange={this.props.onChange}>
+                        <select id="dropdown" onChange={this.props.onClick}>
                             <option value="3">3</option>
                             <option value="2">2</option>
                             <option value="1">1</option>

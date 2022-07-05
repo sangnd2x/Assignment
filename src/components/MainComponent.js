@@ -21,8 +21,11 @@ class Main extends Component {
     constructor(props) {
         super(props);
 
-        this.handleOption = this.handleOption.bind(this);
-        
+        this.state = {
+            numberOfColumn: this.props.numberOfColumn
+        }
+
+        this.handleOption = this.handleOption.bind(this); 
     }
 
     handleOption(e) {
@@ -42,10 +45,10 @@ class Main extends Component {
                 <Header />
                 <ColumnDisplay onClick={(e) => this.handleOption(e)} />
                 <Switch>
-                    <Route exact path="/staffs" component={() => <StaffList dept={this.props.departments}  staffs={this.props.staffs} column={this.props.numberOfColumn} />} />
+                    <Route exact path="/staffs" component={() => <StaffList dept={this.props.departments}  staffs={this.props.staffs} column={this.state.numberOfColumn} />} />
                     <Route path="/staffs/:staffId" component={StaffDetail} />
-                    <Route path="/departments" component={() => <Department department={this.props.departments} column={this.props.numberOfColumn} />} />
-                    <Route path="/salaries" component={() => <Salary staff={this.props.staffs} column={this.props.numberOfColumn}/>} />
+                    <Route path="/departments" component={() => <Department department={this.props.departments} column={this.state.numberOfColumn} />} />
+                    <Route path="/salaries" component={() => <Salary staff={this.props.staffs} column={this.state.numberOfColumn}/>} />
                     <Redirect to="/staffs" />
                 </Switch>
             </div>
