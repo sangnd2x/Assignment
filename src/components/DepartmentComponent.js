@@ -22,12 +22,14 @@ class Department extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Breadcrumb className="breadcrumb">
-                        <BreadcrumbItem>
-                            <Link to="/staffs">Trang chủ</Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
-                    </Breadcrumb>
+                    <div className="col-3">
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to="/staffs">Trang chủ</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
+                        </Breadcrumb>
+                    </div>
                     <div className="col-12">
                         <h3>Phòng Ban</h3>
                     </div>

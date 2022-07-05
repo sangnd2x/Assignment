@@ -3,10 +3,6 @@ import { CardBody, CardTitle, Breadcrumb, BreadcrumbItem, CardText } from "react
 import { Link } from "react-router-dom";
 
 class Salary extends Component {
-    constructor(props) {
-        super(props); 
-
-    }
 
     render() {
         const staff = this.props.staff.map(staff => {
@@ -32,12 +28,14 @@ class Salary extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Breadcrumb className="breadcrumb">
-                        <BreadcrumbItem>
-                            <Link to="/staffs">Trang Chủ</Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
-                    </Breadcrumb>
+                    <div className="col-3">
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to="/staffs">Trang Chủ</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
+                        </Breadcrumb>
+                    </div>
                     <div className="col-12">
                         <h3>Bảng Lương</h3>
                     </div>

@@ -1,14 +1,36 @@
 import React, {Component} from "react";
-import { CardBody, CardImg, Breadcrumb, BreadcrumbItem, CardText } from "reactstrap";
+import { CardBody, CardImg, Breadcrumb, BreadcrumbItem, CardText, Form, Input, Button, FormGroup } from "reactstrap";
 import { Link } from "react-router-dom";
 import AddStaff from "./AddStaffComponent";
-import SearchBar from "./SearchBarComponent";
-
 
 class StaffList extends Component {
+    constructor(props) {
+        super(props);
 
-    render() {
-        const staff = this.props.staff.map(staff => {
+        this.state = {
+            query: '',
+            staffs: this.props.staffs
+        }
+        this.onChange = this.onChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    onChange(e) {
+        this.setState({
+            query: this.name.value
+        })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const foundStaff = this.props.staffs.filter(staff => staff.name.toLowerCase().includes(this.state.query));
+        this.setState({
+            staffs: foundStaff
+        });  
+    }
+
+    render() {        
+        const staff = this.state.staffs.map(staff => {
             return (
                 <div key={staff.id} className={"col-12" + " " + "col-md-" + (12/this.props.column) + " " + "col-lg-" + (12/this.props.column)}>
                     <div>
@@ -22,12 +44,12 @@ class StaffList extends Component {
                 </div>
             )
         });
-
+       
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-4">
-                        <Breadcrumb className="breadcrumb">
+                    <div className="col-3">
+                        <Breadcrumb>
                             <BreadcrumbItem>
                                 <Link to="/staffs" >Trang chủ</Link>
                             </BreadcrumbItem>
@@ -38,7 +60,15 @@ class StaffList extends Component {
                         <AddStaff dept={this.props.dept} />
                     </div>
                     <div>
-                        <SearchBar />
+                        <Form onSubmit={(e) => this.handleSubmit(e)}>
+                            <FormGroup className="search-bar">
+                                <Input type="text" placeholder="Nhập tên nhân viên...."
+                                    innerRef={input => this.name = input}
+                                    onChange={e => this.onChange(e)}
+                                />
+                                <Button type="submit" color="primary">Tìm</Button>
+                            </FormGroup>  
+                        </Form>
                     </div>
                     <div className="col-12">
                         <h3>Nhân Viên</h3>

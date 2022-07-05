@@ -42,7 +42,7 @@ class Main extends Component {
                 <Header />
                 <ColumnDisplay onClick={(e) => this.handleOption(e)} />
                 <Switch>
-                    <Route exact path="/staffs" component={() => <StaffList dept={this.props.departments}  staff={this.props.staffs} column={this.props.numberOfColumn} />} />
+                    <Route exact path="/staffs" component={() => <StaffList dept={this.props.departments}  staffs={this.props.staffs} column={this.props.numberOfColumn} />} />
                     <Route path="/staffs/:staffId" component={StaffDetail} />
                     <Route path="/departments" component={() => <Department department={this.props.departments} column={this.props.numberOfColumn} />} />
                     <Route path="/salaries" component={() => <Salary staff={this.props.staffs} column={this.props.numberOfColumn}/>} />

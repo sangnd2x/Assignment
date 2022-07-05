@@ -4,9 +4,6 @@ import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
 
 class StaffInfo extends Component{
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const staff = this.props.selectedStaff;
@@ -22,12 +19,14 @@ class StaffInfo extends Component{
             return (
                 <div className="container">
                     <div className="row">
-                        <Breadcrumb className="breadcrumb">
-                            <BreadcrumbItem>
-                                <Link to="/staffs">Nhân Viên</Link>
-                            </BreadcrumbItem>
-                                <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
-                        </Breadcrumb>
+                        <div className="col-4">
+                            <Breadcrumb>
+                                <BreadcrumbItem>
+                                    <Link to="/staffs">Nhân Viên</Link>
+                                </BreadcrumbItem>
+                                    <BreadcrumbItem active>{staff.name}</BreadcrumbItem>
+                            </Breadcrumb>
+                        </div>
                         <div className="col-12">
                             <h3>{staff.name}</h3>
                         </div>
