@@ -58,7 +58,7 @@ class StaffList extends Component {
                         </Breadcrumb>
                     </div>
                     <div className="col">
-                        <AddStaff dept={this.props.dept} />
+                        <AddStaff />
                     </div>
                     <div>
                         <Form onSubmit={(e) => this.handleSearch(e)}>

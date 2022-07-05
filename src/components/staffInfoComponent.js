@@ -13,7 +13,7 @@ class StaffInfo extends Component{
                 <div></div>
             )
         } else {
-            const birdthDate = new Date(staff.doB);
+            const birthDate = new Date(staff.doB);
             const joinDate = new Date(staff.startDate);
             
             return (
@@ -38,7 +38,7 @@ class StaffInfo extends Component{
                                     <CardImg width="250" height="250" src={staff.image} alt={staff.name}/>
                                 </div>
                                 <div className="col-lg-9 col-md-8 col-12">
-                                    <CardText><span>Ngày sinh:</span> {dateFormat(birdthDate, "dd/mm/yyyy")}</CardText>
+                                    <CardText><span>Ngày sinh:</span> {dateFormat(birthDate, "dd/mm/yyyy")}</CardText>
                                     <CardText><span>Ngày vào công ty:</span> {dateFormat(joinDate, "dd/mm/yyyy")}</CardText>
                                     <CardText><span>Phòng ban:</span> {staff.department.name}</CardText>
                                     <CardText><span>Số ngày nghỉ còn lại:</span> {staff.annualLeave}</CardText>
