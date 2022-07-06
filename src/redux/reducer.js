@@ -15,6 +15,7 @@ export const Reducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_STAFF:
             return {
+                ...state,
                 staffs: [
                     ...state.staffs,
                     action.payload

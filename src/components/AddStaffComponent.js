@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label, Form, FormGroup, Input } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { connect } from "react-redux";
 import { addStaff } from "../Actions/search";
+
+let newStaffs = JSON.parse(localStorage.getItem('newStaffs'));
 
 class AddStaff extends Component {
     constructor(props) {
@@ -10,10 +12,18 @@ class AddStaff extends Component {
         
         this.state = {
             isFormOpen: false,
-            newStaff: {}
+            newStaff: {
+                name: '',
+                doB: '',
+                salaryScale: '',
+                startDate: '',
+                department: {},
+                annualLeave: '',
+                overTime: '',
+            }
         };
 
-        this.onChange = this.onChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.nextStaffId = this.nextStaffId.bind(this);
         this.toggleForm = this.toggleForm.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,27 +34,33 @@ class AddStaff extends Component {
     }
 
     nextStaffId(staff) {
-        const nextStaffId = staff.length;
+        const nextStaffId = newStaffs? newStaffs.length : staff.length;
         return nextStaffId;
     }
 
-    onChange(e) {
-        const department = this.props.departments;
-        let target = e.target;
-        let name = target.name;
-        let value = target.name === 'department' ? department.filter(dept => dept.name === target.value)[0] : target.value;
+    handleChange(e) {
+        const target = e.target;
+        const name = target.name;
+        const value = name === 'department'? this.props.departments.filter(dept => dept.name === target.value)[0] : target.value;
+
         this.setState({
-            newStaff: { ...this.state.newStaff, [name]: value, id: this.nextStaffId(this.props.staffs), image:'/assets/images/dustin.jpeg' }
+            newStaff: {
+                ...this.state.newStaff,
+                id: this.nextStaffId(this.props.staffs),
+                [name] : value,
+                image: '/assets/images/dustin.jpeg'
+            }
         });
+        console.log(this.state.newStaff)
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
         this.toggleForm();
         const newStaff = this.state.newStaff;
         console.log(newStaff)
         this.props.addStaff(newStaff);
- 
-        // localStorage.setItem('Staffs', JSON.stringify());
+        newStaffs? localStorage.setItem('newStaffs', JSON.stringify([...newStaffs, newStaff])) : localStorage.setItem('newStaffs', JSON.stringify([...this.props.staffs, newStaff]));
+        e.preventDefault();
     }
 
     render() {
@@ -55,79 +71,80 @@ class AddStaff extends Component {
                     <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} >
                         <ModalHeader toggle={this.toggleForm}>Thêm Nhân Viên</ModalHeader>
                         <ModalBody className="col-12 col-md-12">
-                            <LocalForm onSubmit={this.handleSubmit}>
-                                <Row className="form-group">
+                            <Form onSubmit={this.handleSubmit}>
+                                <FormGroup row>
                                     <Label htmlFor="name" className="col-md-3">Tên</Label>
                                     <Col className="col-md-8">
-                                        <Control.text model=".name" name="name" placeholder="Tên nhân viên"
+                                        <Input type="text" id ="name" name="name" placeholder="Tên nhân viên"
+                                            value={this.state.newStaff.name}
                                             className="form-control"
-                                            onChange={e => this.onChange(e)}
+                                            onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </Row>
-                                <Row className="form-group">
+                                </FormGroup>
+                                <FormGroup row>
                                     <Label htmlFor="doB" className="col-md-3">Ngày sinh</Label>
                                     <Col className="col-md-8">
-                                        <Control type="date" model=".doB" name="doB" className="form-control"
+                                        <Input type="date" id="doB" name="doB" className="form-control"
                                             value={this.state.tenState}
-                                            onChange={e => this.onChange(e)}
+                                            onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </Row>
-                                <Row className="form-group">
+                                </FormGroup>
+                                <FormGroup row>
                                     <Label htmlFor="startDate" className="col-md-3">Ngày vào công ty</Label>
                                     <Col className="col-md-8">
-                                        <Control type="date" model=".startDate" name="startDate" className="form-control"
+                                        <Input type="date" id="startDate" name="startDate" className="form-control"
                                             value={this.state.tenState}
-                                            onChange={e => this.onChange(e)}
+                                            onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </Row>
-                                <Row className="form-group">
+                                </FormGroup>
+                                <FormGroup row>
                                     <Label htmlFor="department" className="col-md-3">Phòng ban</Label>
                                     <Col className="col-md-8">
-                                        <Control.select model=".department" name="department" className="form-control"
-                                            onChange={e => this.onChange(e)}
+                                        <Input type="select" id="department" name="department" className="form-control"
+                                            defaultValue="Sale"
+                                            onChange={this.handleChange}
                                         >
-                                            {/* {this.props.departments.map(dept => <option key={dept.id} value={dept.name}>{dept.name}</option>)} */}
                                             <option>Sale</option>
                                             <option>HR</option>
                                             <option>Marketing</option>
                                             <option>Finance</option>
                                             <option>IT</option>
-                                        </Control.select>
+                                        </Input>
                                     </Col>  
-                                </Row>
-                                <Row className="form-group">
+                                </FormGroup>
+                                <FormGroup row>
                                     <Label htmlFor="salaryScale" className="col-md-3">Hệ số lương</Label>
                                     <Col className="col-md-8">
-                                        <Control.text model=".salaryScale" name="salaryScale" className="form-control"
-                                            onChange={e => this.onChange(e)}
+                                        <Input type="text" id ="salaryScale" name="salaryScale" className="form-control"
+                                            onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </Row>
-                                <Row className="form-group">
+                                </FormGroup>
+                                <FormGroup row>
                                     <Label htmlFor="annualLeave"className="col-md-3">Số ngày nghỉ còn lại</Label>
                                     <Col className="col-md-8">
-                                        <Control.text model=".annualLeave" name="annualLeave" className="form-control"
-                                            onChange={e => this.onChange(e)}
+                                        <Input type="text" id="annualLeave" name="annualLeave" className="form-control"
+                                            onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </Row>
-                                <Row className="form-group">
+                                </FormGroup>
+                                <FormGroup row>
                                     <Label htmlFor="overTime" className="col-md-3">Số ngày đã làm thêm</Label>
                                     <Col className="col-md-8">
-                                        <Control.text model=".overTime" name="overTime" className="form-control"
-                                            onChange={e => this.onChange(e)}
+                                        <Input type="text" id="overTime" name="overTime" className="form-control"
+                                            onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </Row>
-                                <Row className="form-group">
+                                </FormGroup>
+                                <FormGroup row>
                                     <Col className="col-5">
                                         <Button type="submit" value="submit" color="primary">Thêm</Button>
                                     </Col>
-                                </Row>
-                            </LocalForm>
+                                </FormGroup>
+                            </Form>
                         </ModalBody>
                     </Modal>
                 </div>

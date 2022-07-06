@@ -9,11 +9,10 @@ import Salary from './SalaryComponent';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
-    const localData = localStorage.getItem('Staffs');
     return {
         departments: state.departments,
         roles: state.roles,
-        staffs: localData? JSON.parse(localData) : state.staffs,
+        staffs: state.staffs,
         numberOfColumn: state.numberOfColumn
     }
 }

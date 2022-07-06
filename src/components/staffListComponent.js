@@ -3,13 +3,15 @@ import { CardBody, CardImg, Breadcrumb, BreadcrumbItem, CardText, Form, Input, B
 import { Link } from "react-router-dom";
 import AddStaff from "./AddStaffComponent";
 
+let newStaffs = JSON.parse(localStorage.getItem('newStaffs'));
+
 class StaffList extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             query: '',
-            staffs: this.props.staffs
+            staffs: newStaffs? newStaffs : this.props.staffs
         }
         this.onChange = this.onChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
