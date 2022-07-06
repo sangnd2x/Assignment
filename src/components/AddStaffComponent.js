@@ -15,20 +15,7 @@ function AddStaff(props) {
     let newStaffs = JSON.parse(localStorage.getItem('newStaffs'));
 
     const [formOpen, setFormOpen] = useState(false);
-    const [newStaff, setNewStaff] = useState({});
-
-    // const renderSelect = (dept) => {
-    //     const abc = dept.map(dept => {
-    //         return (
-    //             <option key={dept.id} value={dept} defaultValue={dept[0]}>{dept.name}</option>
-    //         );
-    //     })
-
-    //     return (
-    //         {abc}
-    //     );
-    // }
-    
+    const [newStaff, setNewStaff] = useState({});    
 
     const toggleForm = () => {
         setFormOpen(!formOpen);
