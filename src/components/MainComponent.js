@@ -8,16 +8,6 @@ import StaffInfo from './StaffInfoComponent';
 import Salary from './SalaryComponent';
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => {
-    const localData = localStorage.getItem('Staffs');
-    return {
-        departments: state.departments,
-        roles: state.roles,
-        staffs: localData? JSON.parse(localData) : state.staffs,
-        numberOfColumn: state.numberOfColumn
-    }
-}
-
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -54,6 +44,15 @@ class Main extends Component {
                 </Switch>
             </div>
         );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        departments: state.departments,
+        roles: state.roles,
+        staffs: state.staffs,
+        numberOfColumn: state.numberOfColumn
     }
 }
 

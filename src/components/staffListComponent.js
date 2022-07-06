@@ -7,9 +7,10 @@ class StaffList extends Component {
     constructor(props) {
         super(props);
 
+        let newStaffs = localStorage.getItem('newStaffs');
         this.state = {
             query: '',
-            staffs: this.props.staffs
+            staffs: newStaffs? JSON.parse(newStaffs) : this.props.staffs
         }
         this.onChange = this.onChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
