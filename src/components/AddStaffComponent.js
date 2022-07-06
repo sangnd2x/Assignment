@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, LocalForm, Errors, Field } from "react-redux-form";
 import { connect } from "react-redux";
 import { addStaff } from "../Actions/search";
 
@@ -78,13 +78,14 @@ function AddStaff(props) {
                                 <Label htmlFor="department" className="col-md-3">Phòng ban</Label>
                                 <Col className="col-md-8">
                                     <Control.select model=".department" name="department" className="form-control"
-                                        onSelect={e => handleChange(e)}
+                                        onChange={e => handleChange(e)}
                                     >
-                                        <option >Sale</option>
-                                        <option >HR</option>
-                                        <option >Marketing</option>
-                                        <option >Finance</option>
-                                        <option >IT</option>
+                                        <option value=""></option>
+                                        <option value="Sale">Sale</option>
+                                        <option value="HR">HR</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="IT">IT</option>
                                     </Control.select>
                                 </Col>  
                             </Row>
