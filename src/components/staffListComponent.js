@@ -3,7 +3,7 @@ import { CardBody, CardImg, Breadcrumb, BreadcrumbItem, CardText, Form, Input, B
 import { Link } from "react-router-dom";
 import AddStaff from "./AddStaffComponent";
 
-let newStaffs = JSON.parse(localStorage.getItem('newStaffs'));
+
 
 class StaffList extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class StaffList extends Component {
 
         this.state = {
             query: '',
-            staffs: newStaffs? newStaffs : this.props.staffs
+            staffs: this.props.staffs
         }
         this.onChange = this.onChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
@@ -60,7 +60,7 @@ class StaffList extends Component {
                         </Breadcrumb>
                     </div>
                     <div className="col">
-                        <AddStaff />
+                        <AddStaff staffs={this.state.staffs} departments={this.props.dept} />
                     </div>
                     <div>
                         <Form onSubmit={(e) => this.handleSearch(e)}>

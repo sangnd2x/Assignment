@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label, Form, FormGroup, Input } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Button, Modal, ModalHeader, ModalBody, Col, Label, Form, FormGroup, Input, FormFeedback } from "reactstrap";
 import { connect } from "react-redux";
 import { addStaff } from "../Actions/search";
 
@@ -20,6 +19,11 @@ class AddStaff extends Component {
                 department: {},
                 annualLeave: '',
                 overTime: '',
+            },
+            touched: {
+                name: false,
+                doB: false,
+                startDate: false
             }
         };
 
@@ -27,43 +31,76 @@ class AddStaff extends Component {
         this.nextStaffId = this.nextStaffId.bind(this);
         this.toggleForm = this.toggleForm.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
     toggleForm() {
-        this.setState({ isFormOpen: !this.state.isFormOpen})
+        this.setState({ isFormOpen: !this.state.isFormOpen })
     }
 
     nextStaffId(staff) {
-        const nextStaffId = newStaffs? newStaffs.length : staff.length;
+        const nextStaffId = newStaffs ? newStaffs.length : staff.length;
         return nextStaffId;
     }
 
     handleChange(e) {
         const target = e.target;
         const name = target.name;
-        const value = name === 'department'? this.props.departments.filter(dept => dept.name === target.value)[0] : target.value;
+        const value = name === 'department' ? this.props.departments.filter(dept => dept.name === target.value)[0] : target.value;
 
         this.setState({
             newStaff: {
                 ...this.state.newStaff,
                 id: this.nextStaffId(this.props.staffs),
-                [name] : value,
+                [name]: value,
                 image: '/assets/images/dustin.jpeg'
             }
         });
-        console.log(this.state.newStaff)
+        console.log(this.state.newStaff);
+        console.log(this.state.touched);
     }
 
     handleSubmit(e) {
         this.toggleForm();
         const newStaff = this.state.newStaff;
-        console.log(newStaff)
-        this.props.addStaff(newStaff);
-        newStaffs? localStorage.setItem('newStaffs', JSON.stringify([...newStaffs, newStaff])) : localStorage.setItem('newStaffs', JSON.stringify([...this.props.staffs, newStaff]));
+        console.log(newStaff);
+        newStaffs ? localStorage.setItem('newStaffs', JSON.stringify([...newStaffs, newStaff])) : localStorage.setItem('newStaffs', JSON.stringify([...this.props.staffs, newStaff]));
         e.preventDefault();
     }
 
+    handleBlur = field => e => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true }
+        });
+    }
+
+    validate(name, doB, startDate) {
+        const errors = {
+            name: '',
+            doB: '',
+            startDate: '',
+        };
+
+        if (this.state.touched.name && name.length === 0)
+            errors.name = 'Yêu cầu nhập';
+        else if (this.state.touched.name && name.length > 30)
+            errors.name = 'Yêu cầu ít hơn 30 ký tự';
+        else if (this.state.touched.name && name.length < 5)
+            errors.name = 'Yêu cầu nhiều hơn 5 ký tự';
+
+        if (this.state.touched.doB)
+            errors.doB = 'Yêu cầu nhập';
+
+        if (this.state.touched.startDate)
+            errors.startDate = 'Yêu cầu nhập';
+            
+            
+        return errors;
+    }
+
     render() {
+        const errors = this.validate(this.state.newStaff.name, this.state.newStaff.doB, this.state.newStaff.startDate)
+
         return (
             <div className="container">
                 <div className="row add-staff">
@@ -77,9 +114,15 @@ class AddStaff extends Component {
                                     <Col className="col-md-8">
                                         <Input type="text" id ="name" name="name" placeholder="Tên nhân viên"
                                             value={this.state.newStaff.name}
+                                            valid={errors.name === ''}
+                                            invalid={errors.name !== ''}
+                                            onBlur={this.handleBlur('name')}
                                             className="form-control"
                                             onChange={this.handleChange}
                                         />
+                                        <FormFeedback>
+                                            {errors.name}
+                                        </FormFeedback>
                                     </Col>  
                                 </FormGroup>
                                 <FormGroup row>
@@ -87,8 +130,14 @@ class AddStaff extends Component {
                                     <Col className="col-md-8">
                                         <Input type="date" id="doB" name="doB" className="form-control"
                                             value={this.state.tenState}
+                                            valid={errors.doB === ''}
+                                            invalid={errors.doB !== ''}
+                                            onBlur={this.handleBlur('doB')}
                                             onChange={this.handleChange}
                                         />
+                                        <FormFeedback>
+                                            {errors.doB}
+                                        </FormFeedback>
                                     </Col>  
                                 </FormGroup>
                                 <FormGroup row>
@@ -96,8 +145,14 @@ class AddStaff extends Component {
                                     <Col className="col-md-8">
                                         <Input type="date" id="startDate" name="startDate" className="form-control"
                                             value={this.state.tenState}
+                                            valid={errors.startDate === ''}
+                                            invalid={errors.startDate !== ''}
+                                            onBlur={this.handleBlur('startDate')}
                                             onChange={this.handleChange}
                                         />
+                                        <FormFeedback>
+                                            {errors.startDate}
+                                        </FormFeedback>
                                     </Col>  
                                 </FormGroup>
                                 <FormGroup row>
@@ -153,9 +208,4 @@ class AddStaff extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    staffs: state.staffs,
-    departments: state.departments
-});
-
-export default connect(mapStateToProps, { addStaff })(AddStaff);
+export default AddStaff;
