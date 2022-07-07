@@ -103,7 +103,6 @@ select {
 }
 
 .add-staff {
-  display: flex;
   float: right;
   padding-top: 10px;
   margin-right: 30px;
