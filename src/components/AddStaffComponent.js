@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, Col, Label, Form, FormGroup, Input, FormFeedback } from "reactstrap";
 
-let newStaffs = JSON.parse(localStorage.getItem('newStaffs'));
-
 class AddStaff extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +12,7 @@ class AddStaff extends Component {
                 doB: '',
                 salaryScale: '',
                 startDate: '',
-                department: {},
+                department: this.props.departments[0],
                 annualLeave: '',
                 overTime: '',
             },
@@ -37,7 +35,7 @@ class AddStaff extends Component {
     }
 
     nextStaffId(staff) {
-        const nextStaffId = newStaffs ? newStaffs.length : staff.length;
+        const nextStaffId = staff.length;
         return nextStaffId;
     }
 
@@ -59,10 +57,15 @@ class AddStaff extends Component {
     }
 
     handleSubmit(e) {
-        this.toggleForm();
-        const newStaff = this.state.newStaff;
-        console.log(newStaff);
-        newStaffs ? localStorage.setItem('newStaffs', JSON.stringify([...newStaffs, newStaff])) : localStorage.setItem('newStaffs', JSON.stringify([...this.props.staffs, newStaff]));
+        const errors = this.validate(this.state.newStaff, this.state.touched);
+
+        if (errors.name === '' && errors.doB === '' && errors.startDate === '') {
+            const newStaff = this.state.newStaff;
+            const newStaffArr = [...this.props.staffs, newStaff];
+
+            this.props.addStaff(newStaffArr);
+            this.toggleForm();
+        }
         e.preventDefault();
     }
 
@@ -72,32 +75,31 @@ class AddStaff extends Component {
         });
     }
 
-    // validate(name, doB, startDate) {
-    //     const errors = {
-    //         name: '',
-    //         doB: '',
-    //         startDate: '',
-    //     };
+    validate(newStaff, touched) {
+        const errors = {
+            name: '',
+            doB: '',
+            startDate: '',
+        };
 
-    //     if (this.state.touched.name && name.length === 0)
-    //         errors.name = 'Yêu cầu nhập';
-    //     else if (this.state.touched.name && name.length > 30)
-    //         errors.name = 'Yêu cầu ít hơn 30 ký tự';
-    //     else if (this.state.touched.name && name.length < 5)
-    //         errors.name = 'Yêu cầu nhiều hơn 5 ký tự';
+        if (touched.name && newStaff.name.length === 0)
+            errors.name = 'Yêu cầu nhập';
+        else if (touched.name && newStaff.name.length > 30)
+            errors.name = 'Yêu cầu ít hơn 30 ký tự';
+        else if (touched.name && newStaff.name.length < 5)
+            errors.name = 'Yêu cầu nhiều hơn 5 ký tự';
 
-    //     if (this.state.touched.doB)
-    //         errors.doB = 'Yêu cầu nhập';
+        if (touched.doB && newStaff.doB.length === 0)
+            errors.doB = 'Yêu cầu nhập';
 
-    //     if (this.state.touched.startDate)
-    //         errors.startDate = 'Yêu cầu nhập';
-            
-            
-    //     return errors;
-    // }
+        if (touched.startDate && newStaff.startDate.length === 0)
+            errors.startDate = 'Yêu cầu nhập';
+             
+        return errors;
+    }
 
     render() {
-        // const errors = this.validate(this.state.newStaff.name, this.state.newStaff.doB, this.state.newStaff.startDate)
+        const errors = this.validate(this.state.newStaff, this.state.touched);
 
         return (
             <div className="container">
@@ -111,16 +113,15 @@ class AddStaff extends Component {
                                     <Label htmlFor="name" className="col-md-3">Tên</Label>
                                     <Col className="col-md-8">
                                         <Input type="text" id ="name" name="name" placeholder="Tên nhân viên"
-                                            value={this.state.newStaff.name}
-                                            // valid={errors.name === ''}
-                                            // invalid={errors.name !== ''}
-                                            // onBlur={this.handleBlur('name')}
+                                            valid={errors.name === ''}
+                                            invalid={errors.name !== ''}
+                                            onBlur={this.handleBlur('name')}
                                             className="form-control"
                                             onChange={this.handleChange}
                                         />
-                                        {/* <FormFeedback>
+                                        <FormFeedback>
                                             {errors.name}
-                                        </FormFeedback> */}
+                                        </FormFeedback>
                                     </Col>  
                                 </FormGroup>
                                 <FormGroup row>
@@ -128,14 +129,14 @@ class AddStaff extends Component {
                                     <Col className="col-md-8">
                                         <Input type="date" id="doB" name="doB" className="form-control"
                                             value={this.state.tenState}
-                                            // valid={errors.doB === ''}
-                                            // invalid={errors.doB !== ''}
-                                            // onBlur={this.handleBlur('doB')}
+                                            valid={errors.doB === ''}
+                                            invalid={errors.doB !== ''}
+                                            onBlur={this.handleBlur('doB')}
                                             onChange={this.handleChange}
                                         />
-                                        {/* <FormFeedback>
+                                        <FormFeedback>
                                             {errors.doB}
-                                        </FormFeedback> */}
+                                        </FormFeedback>
                                     </Col>  
                                 </FormGroup>
                                 <FormGroup row>
@@ -143,21 +144,21 @@ class AddStaff extends Component {
                                     <Col className="col-md-8">
                                         <Input type="date" id="startDate" name="startDate" className="form-control"
                                             value={this.state.tenState}
-                                            // valid={errors.startDate === ''}
-                                            // invalid={errors.startDate !== ''}
-                                            // onBlur={this.handleBlur('startDate')}
+                                            valid={errors.startDate === ''}
+                                            invalid={errors.startDate !== ''}
+                                            onBlur={this.handleBlur('startDate')}
                                             onChange={this.handleChange}
                                         />
-                                        {/* <FormFeedback>
+                                        <FormFeedback>
                                             {errors.startDate}
-                                        </FormFeedback> */}
+                                        </FormFeedback>
                                     </Col>  
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label htmlFor="department" className="col-md-3">Phòng ban</Label>
                                     <Col className="col-md-8">
                                         <Input type="select" id="department" name="department" className="form-control"
-                                            defaultValue="Sale"
+                                            defaultValue={this.state.newStaff.department}
                                             onChange={this.handleChange}
                                         >
                                             <option>Sale</option>
@@ -194,7 +195,7 @@ class AddStaff extends Component {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col className="col-5">
-                                        <Button type="submit" value="submit" color="primary">Thêm</Button>
+                                        <Button type="submit" value="submit" color="primary" >Thêm</Button>
                                     </Col>
                                 </FormGroup>
                             </Form>
