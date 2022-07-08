@@ -10,11 +10,11 @@ class AddStaff extends Component {
             newStaff: {
                 name: '',
                 doB: '',
-                salaryScale: '',
+                salaryScale: 1,
                 startDate: '',
                 department: this.props.departments[0],
-                annualLeave: '',
-                overTime: '',
+                annualLeave: 1.0,
+                overTime: 0,
             },
             touched: {
                 name: false,
@@ -86,8 +86,8 @@ class AddStaff extends Component {
             errors.name = 'Yêu cầu nhập';
         else if (touched.name && newStaff.name.length > 30)
             errors.name = 'Yêu cầu ít hơn 30 ký tự';
-        else if (touched.name && newStaff.name.length < 5)
-            errors.name = 'Yêu cầu nhiều hơn 5 ký tự';
+        else if (touched.name && newStaff.name.length < 2)
+            errors.name = 'Yêu cầu nhiều hơn 2 ký tự';
 
         if (touched.doB && newStaff.doB.length === 0)
             errors.doB = 'Yêu cầu nhập';
@@ -172,8 +172,10 @@ class AddStaff extends Component {
                                 <FormGroup row>
                                     <Label htmlFor="salaryScale" className="col-md-3">Hệ số lương</Label>
                                     <Col className="col-md-8">
-                                        <Input type="text" id ="salaryScale" name="salaryScale" className="form-control"
+                                        <Input type="text" id="salaryScale" name="salaryScale" className="form-control"
+                                            value={this.state.newStaff.salaryScale}
                                             onChange={this.handleChange}
+                                            placeholder="1.0 → 3.0"
                                         />
                                     </Col>  
                                 </FormGroup>
@@ -181,7 +183,9 @@ class AddStaff extends Component {
                                     <Label htmlFor="annualLeave"className="col-md-3">Số ngày nghỉ còn lại</Label>
                                     <Col className="col-md-8">
                                         <Input type="text" id="annualLeave" name="annualLeave" className="form-control"
+                                            value={this.state.newStaff.annualLeave}
                                             onChange={this.handleChange}
+                                            placeholder="1.0"
                                         />
                                     </Col>  
                                 </FormGroup>
@@ -189,7 +193,9 @@ class AddStaff extends Component {
                                     <Label htmlFor="overTime" className="col-md-3">Số ngày đã làm thêm</Label>
                                     <Col className="col-md-8">
                                         <Input type="text" id="overTime" name="overTime" className="form-control"
+                                            value={this.state.newStaff.overTime}
                                             onChange={this.handleChange}
+                                            placeholder="0.0"
                                         />
                                     </Col>  
                                 </FormGroup>

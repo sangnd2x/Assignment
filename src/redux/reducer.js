@@ -1,7 +1,7 @@
 import { DEPARTMENTS } from '../staffs';
 import { ROLE } from '../staffs';
 import { STAFFS } from '../staffs';
-import { ADD_STAFF } from '../Actions/types';
+import { ADD_STAFF } from '../actions/types';
 
 export const initialState = {
     departments: DEPARTMENTS,
