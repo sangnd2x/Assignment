@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from "reactstrap";
-import { Control, LocalForm, Errors, Field } from "react-redux-form";
+import { Control, LocalForm, Errors } from "react-redux-form";
+
+
+// From validations
+const required = val => val && val.length;
+
+const maxLength = len => val => !(val) || (val.length <= len);
+
+const minLength = len => val => !(val) || (val.length >= len);
+
 
 class AddStaff extends Component {
     constructor(props) {
@@ -11,11 +20,11 @@ class AddStaff extends Component {
             newStaff: {
                 name: '',
                 doB: '',
-                salaryScale: '',
+                salaryScale: 1.0,
                 startDate: '',
                 department: this.props.departments[0],
-                annualLeave: '',
-                overTime: '',
+                annualLeave: 0.0,
+                overTime: 0.0,
             },
             touched: {
                 name: false,
@@ -80,6 +89,19 @@ class AddStaff extends Component {
                                         <Control.text model=".name" name="name" placeholder="Tên nhân viên"
                                             className="form-control"
                                             onChange={this.handleChange}
+                                            validators={{
+                                                required,
+                                                minLength: minLength(2),
+                                                maxLength: maxLength(30)
+                                            }}
+                                        >
+                                        </Control.text>
+                                        <Errors className="text-danger" model=".name" show="touched"
+                                            messages={{
+                                                required: 'Yêu cầu nhập',
+                                                maxLength: ' Yêu cầu nhập ít hơn 30 ký tự',
+                                                minLength: ' Yêu cầu nhập nhiều hơn 2 ký tự'
+                                            }}
                                         />
                                     </Col>  
                                 </Row>
@@ -89,6 +111,15 @@ class AddStaff extends Component {
                                         <Control type="date" model=".doB" name="doB" className="form-control"
                                             value={this.state.tenState}
                                             onChange={this.handleChange}
+                                            validators={{
+                                                required
+                                            }}
+                                        >
+                                        </Control>
+                                        <Errors className="text-danger" model=".doB" show="touched"
+                                            messages={{
+                                                required: 'Yêu cầu nhập'
+                                            }}
                                         />
                                     </Col>  
                                 </Row>
@@ -98,6 +129,15 @@ class AddStaff extends Component {
                                         <Control type="date" model=".startDate" name="startDate" className="form-control"
                                             value={this.state.tenState}
                                             onChange={this.handleChange}
+                                            validators={{
+                                                required
+                                            }}
+                                        >
+                                        </Control>
+                                        <Errors className="text-danger" model=".startDate" show="touched"
+                                            messages={{
+                                                required: 'Yêu cầu nhập'
+                                            }}
                                         />
                                     </Col>  
                                 </Row>
@@ -121,6 +161,8 @@ class AddStaff extends Component {
                                     <Col className="col-md-8">
                                         <Control.text model=".salaryScale" name="salaryScale" className="form-control"
                                             onChange={this.handleChange}
+                                            value={this.state.newStaff.salaryScale}
+                                            placeholder="1.0 → 3.0"
                                         />
                                     </Col>  
                                 </Row>
@@ -129,6 +171,8 @@ class AddStaff extends Component {
                                     <Col className="col-md-8">
                                         <Control.text model=".annualLeave" name="annualLeave" className="form-control"
                                             onChange={this.handleChange}
+                                            value={this.state.newStaff.annualLeave}
+                                            placeholder="1.0"
                                         />
                                     </Col>  
                                 </Row>
@@ -137,6 +181,8 @@ class AddStaff extends Component {
                                     <Col className="col-md-8">
                                         <Control.text model=".overTime" name="overTime" className="form-control"
                                             onChange={this.handleChange}
+                                            value={this.state.newStaff.overTime}
+                                            placeholder="1.0"
                                         />
                                     </Col>  
                                 </Row>
@@ -153,7 +199,5 @@ class AddStaff extends Component {
         );
     }
 }
-
-
 
 export default AddStaff;
