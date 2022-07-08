@@ -1,6 +1,6 @@
 import { ADD_STAFF } from "./types";
 
-export const addStaff = staff => {
+export const addNewStaff = staff => {
     return {
         type: ADD_STAFF,
         payload: staff

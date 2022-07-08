@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody, Col, Label, Form, FormGroup, Input, FormFeedback } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from "reactstrap";
+import { Control, LocalForm, Errors, Field } from "react-redux-form";
 
 class AddStaff extends Component {
     constructor(props) {
@@ -27,7 +28,6 @@ class AddStaff extends Component {
         this.nextStaffId = this.nextStaffId.bind(this);
         this.toggleForm = this.toggleForm.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
     }
 
     toggleForm() {
@@ -57,49 +57,14 @@ class AddStaff extends Component {
     }
 
     handleSubmit(e) {
-        const errors = this.validate(this.state.newStaff, this.state.touched);
+        const newStaff = this.state.newStaff;
 
-        if (errors.name === '' && errors.doB === '' && errors.startDate === '') {
-            const newStaff = this.state.newStaff;
-            const newStaffArr = [...this.props.staffs, newStaff];
 
-            this.props.addStaff(newStaffArr);
-            this.toggleForm();
-        }
-        e.preventDefault();
-    }
-
-    handleBlur = field => e => {
-        this.setState({
-            touched: { ...this.state.touched, [field]: true }
-        });
-    }
-
-    validate(newStaff, touched) {
-        const errors = {
-            name: '',
-            doB: '',
-            startDate: '',
-        };
-
-        if (touched.name && newStaff.name.length === 0)
-            errors.name = 'Yêu cầu nhập';
-        else if (touched.name && newStaff.name.length > 30)
-            errors.name = 'Yêu cầu ít hơn 30 ký tự';
-        else if (touched.name && newStaff.name.length < 5)
-            errors.name = 'Yêu cầu nhiều hơn 5 ký tự';
-
-        if (touched.doB && newStaff.doB.length === 0)
-            errors.doB = 'Yêu cầu nhập';
-
-        if (touched.startDate && newStaff.startDate.length === 0)
-            errors.startDate = 'Yêu cầu nhập';
-             
-        return errors;
+        this.props.addStaffCallBack(newStaff);
+        this.toggleForm();
     }
 
     render() {
-        const errors = this.validate(this.state.newStaff, this.state.touched);
 
         return (
             <div className="container">
@@ -108,56 +73,38 @@ class AddStaff extends Component {
                     <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} >
                         <ModalHeader toggle={this.toggleForm}>Thêm Nhân Viên</ModalHeader>
                         <ModalBody className="col-12 col-md-12">
-                            <Form onSubmit={this.handleSubmit}>
-                                <FormGroup row>
+                            <LocalForm onSubmit={this.handleSubmit}>
+                                <Row className="form-group">
                                     <Label htmlFor="name" className="col-md-3">Tên</Label>
                                     <Col className="col-md-8">
-                                        <Input type="text" id ="name" name="name" placeholder="Tên nhân viên"
-                                            valid={errors.name === ''}
-                                            invalid={errors.name !== ''}
-                                            onBlur={this.handleBlur('name')}
+                                        <Control.text model=".name" name="name" placeholder="Tên nhân viên"
                                             className="form-control"
                                             onChange={this.handleChange}
                                         />
-                                        <FormFeedback>
-                                            {errors.name}
-                                        </FormFeedback>
                                     </Col>  
-                                </FormGroup>
-                                <FormGroup row>
+                                </Row>
+                                <Row className="form-group">
                                     <Label htmlFor="doB" className="col-md-3">Ngày sinh</Label>
                                     <Col className="col-md-8">
-                                        <Input type="date" id="doB" name="doB" className="form-control"
+                                        <Control type="date" model=".doB" name="doB" className="form-control"
                                             value={this.state.tenState}
-                                            valid={errors.doB === ''}
-                                            invalid={errors.doB !== ''}
-                                            onBlur={this.handleBlur('doB')}
                                             onChange={this.handleChange}
                                         />
-                                        <FormFeedback>
-                                            {errors.doB}
-                                        </FormFeedback>
                                     </Col>  
-                                </FormGroup>
-                                <FormGroup row>
+                                </Row>
+                                <Row className="form-group">
                                     <Label htmlFor="startDate" className="col-md-3">Ngày vào công ty</Label>
                                     <Col className="col-md-8">
-                                        <Input type="date" id="startDate" name="startDate" className="form-control"
+                                        <Control type="date" model=".startDate" name="startDate" className="form-control"
                                             value={this.state.tenState}
-                                            valid={errors.startDate === ''}
-                                            invalid={errors.startDate !== ''}
-                                            onBlur={this.handleBlur('startDate')}
                                             onChange={this.handleChange}
                                         />
-                                        <FormFeedback>
-                                            {errors.startDate}
-                                        </FormFeedback>
                                     </Col>  
-                                </FormGroup>
-                                <FormGroup row>
+                                </Row>
+                                <Row className="form-group">
                                     <Label htmlFor="department" className="col-md-3">Phòng ban</Label>
                                     <Col className="col-md-8">
-                                        <Input type="select" id="department" name="department" className="form-control"
+                                        <Control.select model=".department" name="department" className="form-control"
                                             defaultValue={this.state.newStaff.department}
                                             onChange={this.handleChange}
                                         >
@@ -166,39 +113,39 @@ class AddStaff extends Component {
                                             <option>Marketing</option>
                                             <option>Finance</option>
                                             <option>IT</option>
-                                        </Input>
+                                        </Control.select>
                                     </Col>  
-                                </FormGroup>
-                                <FormGroup row>
+                                </Row>
+                                <Row className="form-group">
                                     <Label htmlFor="salaryScale" className="col-md-3">Hệ số lương</Label>
                                     <Col className="col-md-8">
-                                        <Input type="text" id ="salaryScale" name="salaryScale" className="form-control"
+                                        <Control.text model=".salaryScale" name="salaryScale" className="form-control"
                                             onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </FormGroup>
-                                <FormGroup row>
+                                </Row>
+                                <Row className="form-group">
                                     <Label htmlFor="annualLeave"className="col-md-3">Số ngày nghỉ còn lại</Label>
                                     <Col className="col-md-8">
-                                        <Input type="text" id="annualLeave" name="annualLeave" className="form-control"
+                                        <Control.text model=".annualLeave" name="annualLeave" className="form-control"
                                             onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </FormGroup>
-                                <FormGroup row>
+                                </Row>
+                                <Row className="form-group">
                                     <Label htmlFor="overTime" className="col-md-3">Số ngày đã làm thêm</Label>
                                     <Col className="col-md-8">
-                                        <Input type="text" id="overTime" name="overTime" className="form-control"
+                                        <Control.text model=".overTime" name="overTime" className="form-control"
                                             onChange={this.handleChange}
                                         />
                                     </Col>  
-                                </FormGroup>
-                                <FormGroup row>
+                                </Row>
+                                <Row className="form-group">
                                     <Col className="col-5">
                                         <Button type="submit" value="submit" color="primary" >Thêm</Button>
                                     </Col>
-                                </FormGroup>
-                            </Form>
+                                </Row>
+                            </LocalForm>
                         </ModalBody>
                     </Modal>
                 </div>
@@ -206,5 +153,7 @@ class AddStaff extends Component {
         );
     }
 }
+
+
 
 export default AddStaff;
