@@ -23,7 +23,7 @@ class AddStaff extends Component {
                 salaryScale: 1.0,
                 startDate: '',
                 department: this.props.departments[0],
-                annualLeave: 0.0,
+                annualLeave: 1.0,
                 overTime: 0.0,
             },
             touched: {
@@ -182,7 +182,7 @@ class AddStaff extends Component {
                                         <Control.text model=".overTime" name="overTime" className="form-control"
                                             onChange={this.handleChange}
                                             value={this.state.newStaff.overTime}
-                                            placeholder="1.0"
+                                            placeholder="0.0"
                                         />
                                     </Col>  
                                 </Row>
