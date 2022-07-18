@@ -8,7 +8,7 @@ import Salary from './SalaryComponent';
 import AddStaff from './AddStaffComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addNewStaff } from '../actions/search';
+import { addStaff } from '../actions/addStaff';
 
 const newStaffs = JSON.parse(localStorage.getItem('newStaffs'));
 
@@ -17,7 +17,7 @@ const mapStateToProps = state => {
         departments: state.departments,
         roles: state.roles,
         staffs: state.staffs,
-        numberOfColumn: state.numberOfColumn
+        numberOfColumn: 3
     }
 }
 
@@ -40,7 +40,7 @@ class Main extends Component {
     }
 
     addStaffCallBack(addStaffData) {
-        this.props.addNewStaff(addStaffData);
+        this.props.addStaff(addStaffData);
         
         const newStaffArr = newStaffs? [...newStaffs, addStaffData] : [...this.state.staffs, addStaffData]
         
@@ -87,4 +87,4 @@ class Main extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps, {addNewStaff})(Main));
+export default withRouter(connect(mapStateToProps, {addStaff})(Main));
