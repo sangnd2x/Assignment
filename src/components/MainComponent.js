@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Header from './HeaderComponent';
 import StaffList from './StaffListComponent';
-import Department from './DepartmentComponent';
+import Departments from './DepartmentComponent';
 import ColumnDisplay from './ColumnDisplayComponent';
 import StaffInfo from './StaffInfoComponent';
 import Salary from './SalaryComponent';
-import AddStaff from './AddStaffComponent';
+import AddNewStaff from './AddNewStaffComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addStaff } from '../actions/addStaff';
+import { addNewStaff } from '../actions/ActionsCreator';
+import { fetchStaffs, fetchDepartments, fetchSalaries } from '../actions/ActionsCreator';
 
 const newStaffs = JSON.parse(localStorage.getItem('newStaffs'));
 
@@ -17,9 +18,16 @@ const mapStateToProps = state => {
         departments: state.departments,
         roles: state.roles,
         staffs: state.staffs,
+        salaries: state.salaries,
         numberOfColumn: 3
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    fetchStaffs: () => {dispatch(fetchStaffs())},
+    fetchDepartments: () => { dispatch(fetchDepartments()) },
+    fetchSalaries: () => {dispatch(fetchSalaries())}
+});
 
 class Main extends Component {
     constructor(props) {
@@ -34,13 +42,19 @@ class Main extends Component {
         this.addStaffCallBack = this.addStaffCallBack.bind(this);
     }
 
+    componentDidMount() {
+        this.props.fetchStaffs();
+        this.props.fetchDepartments();
+        this.props.fetchSalaries();
+    }
+
     handleOption(e) {
         e.preventDefault();
         this.setState({ numberOfColumn: e.target.value });
     }
 
     addStaffCallBack(addStaffData) {
-        this.props.addStaff(addStaffData);
+        this.props.addNewStaff(addStaffData);
         
         const newStaffArr = newStaffs? [...newStaffs, addStaffData] : [...this.state.staffs, addStaffData]
         
@@ -55,7 +69,7 @@ class Main extends Component {
     render() {
         const StaffDetail = ({match}) => {
             return (
-                <StaffInfo selectedStaff={ this.props.staffs.filter(staff => staff.id === parseInt(match.params.staffId, 10))[0]} />
+                <StaffInfo selectedStaff={ this.props.staffs.staffs.filter(staff => staff.id === parseInt(match.params.staffId, 10))[0]} />
             );
         }
 
@@ -63,21 +77,27 @@ class Main extends Component {
             <div>
                 <Header />
                 <ColumnDisplay onClick={(e) => this.handleOption(e)} />
-                <AddStaff staffs={this.props.staffs} addStaffCallBack={this.addStaffCallBack}
+                <AddNewStaff staffs={this.props.staffs} addStaffCallBack={this.addStaffCallBack}
                     touched={this.props.touched} departments={this.props.departments} />
                 <Switch>
                     <Route exact path="/staffs" component={() => <StaffList
+                        staffs={this.props.staffs.staffs}
+                        staffsLoading={this.props.staffs.isLoading}
+                        staffsError={this.props.staffs.errorMess}
                         departments={this.props.departments}
-                        staffs={this.state.staffs}
-                        column={this.state.numberOfColumn} />}
+                        column={this.props.numberOfColumn} />}
                     />
                     <Route path="/staffs/:staffId" component={StaffDetail} />
-                    <Route path="/departments" component={() => <Department
-                        department={this.props.departments}
+                    <Route path="/departments" component={() => <Departments
+                        departments={this.props.departments.departments}
+                        deparmentsLoading={this.props.departments.isLoading}
+                        deparmentsError={this.props.departments.errorMess}
                         column={this.state.numberOfColumn} />}
                     />
                     <Route path="/salaries" component={() => <Salary
-                        staff={this.state.staffs}
+                        salaries={this.props.salaries.salaries}
+                        salariesLoading={this.props.salaries.isLoading}
+                        salariesError={this.props.salaries.errorMess}
                         column={this.state.numberOfColumn} />}
                     />
                     <Redirect to="/staffs" />
@@ -87,4 +107,4 @@ class Main extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps, {addStaff})(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

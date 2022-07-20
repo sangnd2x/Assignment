@@ -40,7 +40,7 @@ class StaffInfo extends Component{
                                 <div className="col-lg-9 col-md-8 col-12">
                                     <CardText><span>Ngày sinh:</span> {dateFormat(birthDate, "dd/mm/yyyy")}</CardText>
                                     <CardText><span>Ngày vào công ty:</span> {dateFormat(joinDate, "dd/mm/yyyy")}</CardText>
-                                    <CardText><span>Phòng ban:</span> {staff.department.name}</CardText>
+                                    <CardText><span>Phòng ban:</span> {staff.department}</CardText>
                                     <CardText><span>Số ngày nghỉ còn lại:</span> {staff.annualLeave}</CardText>
                                     <CardText><span>Số ngày đã làm thêm:</span> {staff.overTime}</CardText>
                                 </div>

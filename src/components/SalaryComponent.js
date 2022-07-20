@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { CardBody, CardTitle, Breadcrumb, BreadcrumbItem, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Loading } from "./LoadingComponent";
 
 class Salary extends Component {
 
     render() {
-        const staff = this.props.staff.map(staff => {
+        const staff = this.props.salaries.map(staff => {
             return (
                 <div key={staff.id} className={"col-12" + " " + "col-md-" + (12/this.props.column) + " " + "col-lg-" + (12/this.props.column)}>
                     <div >
@@ -25,26 +26,44 @@ class Salary extends Component {
             )
         });
 
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-3">
-                        <Breadcrumb>
-                            <BreadcrumbItem>
-                                <Link to="/staffs">Trang Chủ</Link>
-                            </BreadcrumbItem>
-                            <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
-                        </Breadcrumb>
-                    </div>
-                    <div className="col-12">
-                        <h3>Bảng Lương</h3>
+        if (this.props.staffsLoading) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
                     </div>
                 </div>
-                <div className="row">
-                    {staff}
+            );
+        } else if (this.props.salariesError) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <h4>{this.props.salariesError}</h4>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else { 
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="col-3">
+                            <Breadcrumb>
+                                <BreadcrumbItem>
+                                    <Link to="/staffs">Trang Chủ</Link>
+                                </BreadcrumbItem>
+                                <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
+                            </Breadcrumb>
+                        </div>
+                        <div className="col-12">
+                            <h3>Bảng Lương</h3>
+                        </div>
+                    </div>
+                    <div className="row">
+                        {staff}
+                    </div>
+                </div>
+            );
+        }
     }
 }
 

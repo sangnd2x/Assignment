@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import { CardBody, CardImg, Breadcrumb, BreadcrumbItem, CardText, Form, Input, Button, FormGroup} from "reactstrap";
 import { Link } from "react-router-dom";
-
-
-
+import { Loading } from "./LoadingComponent";
 
 class StaffList extends Component {
     constructor(props) {
@@ -25,6 +23,7 @@ class StaffList extends Component {
 
     handleSearch(e) {
         e.preventDefault();
+        console.log(this.props.staffs);
         const foundStaff = this.props.staffs.filter(staff => staff.name.toLowerCase().includes(this.state.query));
         this.setState({
             staffs: foundStaff
@@ -46,38 +45,56 @@ class StaffList extends Component {
                 </div>
             )
         });
-       
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-3">
-                        <Breadcrumb>
-                            <BreadcrumbItem>
-                                <Link to="/staffs" >Trang chủ</Link>
-                            </BreadcrumbItem>
-                            <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
-                        </Breadcrumb>
-                    </div>
-                    <div>
-                        <Form onSubmit={(e) => this.handleSearch(e)}>
-                            <FormGroup className="search-bar">
-                                <Input type="text" placeholder="Nhập tên nhân viên...."
-                                    innerRef={input => this.name = input}
-                                    onChange={e => this.onChange(e)}
-                                />
-                                <Button type="submit" color="primary">Tìm</Button>
-                            </FormGroup>  
-                        </Form>
-                    </div>
-                    <div className="col-12">
-                        <h3>Nhân Viên</h3>
+        
+        if (this.props.staffsLoading) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
                     </div>
                 </div>
-                <div className="row">
-                    {staff}
+            );
+        } else if (this.props.staffsError) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <h4>{this.props.staffsError}</h4>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="col-3">
+                            <Breadcrumb>
+                                <BreadcrumbItem>
+                                    <Link to="/staffs" >Trang chủ</Link>
+                                </BreadcrumbItem>
+                                <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
+                            </Breadcrumb>
+                        </div>
+                        <div>
+                            <Form onSubmit={(e) => this.handleSearch(e)}>
+                                <FormGroup className="search-bar">
+                                    <Input type="text" placeholder="Nhập tên nhân viên...."
+                                        innerRef={input => this.name = input}
+                                        onChange={e => this.onChange(e)}
+                                    />
+                                    <Button type="submit" color="primary">Tìm</Button>
+                                </FormGroup>  
+                            </Form>
+                        </div>
+                        <div className="col-12">
+                            <h3>Nhân Viên</h3>
+                        </div>
+                    </div>
+                    <div className="row">
+                        {staff}
+                    </div>
+                </div>
+            );
+        }
     }
 }
 

@@ -11,7 +11,7 @@ const maxLength = len => val => !(val) || (val.length <= len);
 const minLength = len => val => !(val) || (val.length >= len);
 
 
-class AddStaff extends Component {
+class AddNewStaff extends Component {
     constructor(props) {
         super(props);
         
@@ -200,4 +200,4 @@ class AddStaff extends Component {
     }
 }
 
-export default AddStaff;
+export default AddNewStaff;
