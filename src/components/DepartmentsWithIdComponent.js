@@ -40,7 +40,7 @@ class DeptStaffs extends Component {
                                 <CardText><span>Số ngày đã làm thêm:</span> {staff.overTime}</CardText>
                             </div>
                             <div className="btn">
-                                <Button type="submit" value="submit" color="primary" >Sửa</Button>
+                                <Button type="submit" value="submit" color="primary">Sửa</Button>
                                 <Button type="submit" value="submit" color="danger">Xoá</Button>
                             </div>
                         </CardBody>
