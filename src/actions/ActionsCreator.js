@@ -1,7 +1,7 @@
 import * as ActionTypes from './types';
 import { baseUrl } from '../baseURL';
 
-// Staffs
+// Fetch Staffs
 export const fetchStaffs = () => (dispatch) => {
     dispatch(staffsLoading(true));
 
@@ -38,12 +38,7 @@ export const addStaffs = (staffs) => ({
     payload: staffs
 });
 
-export const addNewStaff = (staff) => ({
-    type: ActionTypes.ADD_NEW_STAFF,
-    payload: staff
-});
-
-// Departments
+// Fetch Departments
 export const fetchDepartments = () => (dispatch) => {
     dispatch(departmentsLoading(true));
 
@@ -80,7 +75,7 @@ export const addDepartments = (departments) => ({
     payload: departments
 });
 
-// Salaries
+// Fetch Salaries
 export const fetchSalaries = () => (dispatch) => {
     dispatch(salariesLoading(true));
 
@@ -116,4 +111,42 @@ export const addSalaries = (salaries) => ({
     type: ActionTypes.ADD_SALARIES,
     payload: salaries
 });
+
+
+// Add new staff
+export const addNewStaff = (staff) => ({
+    type: ActionTypes.ADD_NEW_STAFF,
+    payload: staff
+});
+
+export const postStaff = (newStaff) => (dispatch) => {
+
+    return fetch(baseUrl + 'staffs', {
+        method: 'POST',
+        body: JSON.stringify(newStaff),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(addNewStaff(response)))
+        .catch(error => {
+            console.log('Add staff ', error.message);
+            alert('Cannot add staff\nError: ' + error.message);
+        });
+}
 

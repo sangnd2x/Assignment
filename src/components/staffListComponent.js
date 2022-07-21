@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { CardBody, CardImg, Breadcrumb, BreadcrumbItem, CardText, Form, Input, Button, FormGroup} from "reactstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
+import AddNewStaff from "./AddNewStaffComponent";
 
 class StaffList extends Component {
     constructor(props) {
@@ -65,6 +66,7 @@ class StaffList extends Component {
         } else {
             return (
                 <div className="container">
+                    
                     <div className="row">
                         <div className="col-3">
                             <Breadcrumb>
@@ -74,6 +76,7 @@ class StaffList extends Component {
                                 <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
                             </Breadcrumb>
                         </div>
+                        
                         <div>
                             <Form onSubmit={(e) => this.handleSearch(e)}>
                                 <FormGroup className="search-bar">
@@ -85,10 +88,19 @@ class StaffList extends Component {
                                 </FormGroup>  
                             </Form>
                         </div>
+                        <div>
+                            <AddNewStaff
+                                staffs={this.props.staffs}
+                                postStaff={this.props.postStaff}
+                                touched={this.props.touched}
+                                departments={this.props.departments}
+                            />
+                        </div>
                         <div className="col-12">
                             <h3>Nhân Viên</h3>
                         </div>
                     </div>
+                    
                     <div className="row">
                         {staff}
                     </div>

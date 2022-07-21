@@ -108,4 +108,7 @@ select {
   margin-right: 30px;
 }
 
+.dept-staff {
+  display: flex;
+}
 

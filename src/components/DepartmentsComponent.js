@@ -8,14 +8,16 @@ class Departments extends Component {
     render() {
         const departments = this.props.departments.map(dept => {
             return (
-                <div key={dept.id} className={"col-12" + " " + "col-md-" + (12/this.props.column) + " " + "col-lg-" + (12/this.props.column)}>
-                    <Card className="dept">
-                        <div className={`${dept.icon}, dept-icon`}></div>
-                        <CardTitle>{dept.name}</CardTitle>
-                        <CardBody>
-                            <CardText>Số nhân viên: {dept.numberOfStaff}</CardText>
-                        </CardBody>
-                    </Card>
+                <div key={dept.id} className={"col-12" + " " + "col-md-" + (12 / this.props.column) + " " + "col-lg-" + (12 / this.props.column)}>
+                    <Link to={`/departments/${dept.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
+                        <Card className="dept">
+                            <div className={`${dept.icon}, dept-icon`}></div>
+                            <CardTitle>{dept.name}</CardTitle>
+                            <CardBody>
+                                <CardText>Số nhân viên: {dept.numberOfStaff}</CardText>
+                            </CardBody>
+                        </Card>
+                    </Link>
                 </div>
             );
         });

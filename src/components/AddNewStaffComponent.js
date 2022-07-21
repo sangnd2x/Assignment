@@ -22,7 +22,7 @@ class AddNewStaff extends Component {
                 doB: '',
                 salaryScale: 1.0,
                 startDate: '',
-                department: this.props.departments[0],
+                departmentId: 'Dept01',
                 annualLeave: 1.0,
                 overTime: 0.0,
             },
@@ -44,32 +44,28 @@ class AddNewStaff extends Component {
     }
 
     nextStaffId(staff) {
-        const nextStaffId = staff.length;
+        const nextStaffId = staff.length + 1;
         return nextStaffId;
     }
 
     handleChange(e) {
         const target = e.target;
         const name = target.name;
-        const value = name === 'department' ? this.props.departments.filter(dept => dept.name === target.value)[0] : target.value;
+        const value = name === 'departmentId' ? this.props.departments.filter(dept => dept.name.includes(target.value))[0].id : target.value;
 
         this.setState({
             newStaff: {
                 ...this.state.newStaff,
                 id: this.nextStaffId(this.props.staffs),
                 [name]: value,
-                image: '/assets/images/dustin.jpeg'
+                image: '/assets/images/alberto.png'
             }
         });
-        console.log(this.state.newStaff);
-        console.log(this.state.touched);
     }
 
     handleSubmit(e) {
         const newStaff = this.state.newStaff;
-
-
-        this.props.addStaffCallBack(newStaff);
+        this.props.postStaff(newStaff);
         this.toggleForm();
     }
 
@@ -142,10 +138,10 @@ class AddNewStaff extends Component {
                                     </Col>  
                                 </Row>
                                 <Row className="form-group">
-                                    <Label htmlFor="department" className="col-md-3">Phòng ban</Label>
+                                    <Label htmlFor="departmentId" className="col-md-3">Phòng ban</Label>
                                     <Col className="col-md-8">
-                                        <Control.select model=".department" name="department" className="form-control"
-                                            defaultValue={this.state.newStaff.department}
+                                        <Control.select model=".departmentId" name="departmentId" className="form-control"
+                                            defaultValue={this.state.newStaff.departmentId}
                                             onChange={this.handleChange}
                                         >
                                             <option>Sale</option>

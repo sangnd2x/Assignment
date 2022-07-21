@@ -13,7 +13,10 @@ export const Staffs = (state = {
             return { ...state, isLoading: true, errorMess: null, staffs: [] };
         
         case ActionTypes.FAILED_STAFFS:
-            return { ...state, isLoading: false, errorMess: action.payload};
+            return { ...state, isLoading: false, errorMess: action.payload };
+        
+        case ActionTypes.ADD_NEW_STAFF:
+            return {...state, isLoading: false, errorMess: null, staffs: action.payload}
         
         default:
             return state;
