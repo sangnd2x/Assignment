@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Card, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem, Button } from "reactstrap"
+import { Card, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem} from "reactstrap"
 import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
-import EditStaff from "./EditStaffComponent";
-import { deleteStaff } from "../actions/ActionsCreator";
 
 class DeptStaffs extends Component {
     constructor(props) {

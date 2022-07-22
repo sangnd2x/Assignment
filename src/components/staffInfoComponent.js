@@ -10,17 +10,16 @@ class StaffInfo extends Component{
 
         this.state = {
             selectedStaff: this.props.selectedStaff,
-            department: this.props.department
+            departments: this.props.departments
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit() {
-        // const confirm = window.confirm("Bạn có chắc là muốn xoá nhân viên này?");
-        // if (!confirm) return;
-        // else this.props.deleteStaff(this.props.selectedStaff.id);
-        console.log(this.state.department);
+        const confirm = window.confirm("Bạn có chắc là muốn xoá nhân viên này?");
+        if (!confirm) return;
+        else this.props.deleteStaff(this.props.selectedStaff.id);
     }
 
     render() {
@@ -34,7 +33,7 @@ class StaffInfo extends Component{
         } else {
             const birthDate = new Date(staff.doB);
             const joinDate = new Date(staff.startDate);
-            // const dept = this.props.departments.filter(dept => dept.id.includes(staff.departmentId))[0];
+            const dept = this.props.departments.filter(dept => dept.id.includes(staff.departmentId))[0];
             
             return (
                 <div className="container">
@@ -60,7 +59,7 @@ class StaffInfo extends Component{
                                 <div className="col-lg-7 col-md-6 col-12">
                                     <CardText><span>Ngày sinh:</span> {dateFormat(birthDate, "dd/mm/yyyy")}</CardText>
                                     <CardText><span>Ngày vào công ty:</span> {dateFormat(joinDate, "dd/mm/yyyy")}</CardText>
-                                    <CardText><span>Phòng ban:</span> {this.state.department.name} </CardText>
+                                    <CardText><span>Phòng ban:</span> {dept.name} </CardText>
                                     <CardText><span>Số ngày nghỉ còn lại:</span> {staff.annualLeave}</CardText>
                                     <CardText><span>Số ngày đã làm thêm:</span> {staff.overTime}</CardText>
                                 </div>

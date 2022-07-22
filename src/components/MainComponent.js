@@ -9,6 +9,7 @@ import DeptStaffs from './DepartmentsWithIdComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStaffs, fetchDepartments, fetchSalaries, postStaff, deleteStaff, updateStaff } from '../actions/ActionsCreator';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const mapStateToProps = state => {
     return {
@@ -53,11 +54,10 @@ class Main extends Component {
 
     render() {
         const StaffDetail = ({ match }) => {
-            const selectedStaff = this.props.staffs.staffs.filter(staff => staff.id === parseInt(match.params.staffId, 10))[0];
             return (
                 <StaffInfo
-                    selectedStaff={selectedStaff}
-                    department={this.props.departments.departments.filter(dept => dept.id === selectedStaff.departmentId)[0]}
+                    selectedStaff={this.props.staffs.staffs.filter(staff => staff.id === parseInt(match.params.staffId, 10))[0]}
+                    departments={this.props.departments.departments}
                     deleteStaff={this.props.deleteStaff}
                     updateStaff={this.props.updateStaff}
                 />
