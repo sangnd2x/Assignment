@@ -150,3 +150,75 @@ export const postStaff = (newStaff) => (dispatch) => {
         });
 }
 
+// Delete Staff
+export const delStaff = (staffId) => ({
+    type: ActionTypes.DELETE_STAFF,
+    payload: staffId
+});
+
+export const deleteStaff = (staffId) => (dispatch) => {
+
+    return fetch(baseUrl + 'staffs/' + `${staffId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(delStaff(response)))
+        .catch(error => {
+            console.log('Delete staff ', error.message);
+            alert('Cannot delete staff\nError: ' + error.message);
+        });
+}
+
+// Update Staff
+export const editStaff = (staff) => ({
+    type: ActionTypes.EDIT_STAFF,
+    payload: staff
+});
+
+export const updateStaff = (newStaff, staffId) => (dispatch) => {
+
+    return fetch(baseUrl + 'staffs', {
+        method: 'PATCH',
+        body: JSON.stringify(newStaff),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(editStaff(response)))
+        .catch(error => {
+            console.log('Edit staff ', error.message);
+            alert('Cannot edit staff\nError: ' + error.message);
+        });
+}

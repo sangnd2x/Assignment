@@ -112,3 +112,11 @@ select {
   display: flex;
 }
 
+.btn {
+  display: flex;
+}
+
+.del-btn {
+  padding-top: 10px;
+}
+

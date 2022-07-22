@@ -16,7 +16,13 @@ export const Staffs = (state = {
             return { ...state, isLoading: false, errorMess: action.payload };
         
         case ActionTypes.ADD_NEW_STAFF:
-            return {...state, isLoading: false, errorMess: null, staffs: action.payload}
+            return { ...state, isLoading: false, errorMess: null, staffs: action.payload }
+        
+        case ActionTypes.DELETE_STAFF:
+            return { ...state, isLoading: false, errorMess: null, staffs: action.payload }
+        
+        case ActionTypes.EDIT_STAFF:
+            return { ...state, isLoading: false, errorMess: null, staffs: action.payload}
         
         default:
             return state;

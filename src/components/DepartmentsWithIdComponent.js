@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Card, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem, Button } from "reactstrap"
 import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
+import EditStaff from "./EditStaffComponent";
+import { deleteStaff } from "../actions/ActionsCreator";
 
 class DeptStaffs extends Component {
     constructor(props) {
@@ -9,7 +11,7 @@ class DeptStaffs extends Component {
 
         this.state = {
             staffs: this.props.staffs
-        }
+        };
     }
 
     render() {
@@ -21,7 +23,7 @@ class DeptStaffs extends Component {
                 <div></div>
             )
         } else {
-            const staffs = this.props.staffs.filter(staff => staff.departmentId == dept.id)
+            const staffs = this.props.staffs.filter(staff => staff.departmentId === dept.id)
                 .map(staff => {
                 const birthDate = new Date(staff.doB);
                 const joinDate = new Date(staff.startDate);
@@ -38,10 +40,6 @@ class DeptStaffs extends Component {
                                 <CardText><span>Phòng ban:</span> {dept.name} </CardText>
                                 <CardText><span>Số ngày nghỉ còn lại:</span> {staff.annualLeave}</CardText>
                                 <CardText><span>Số ngày đã làm thêm:</span> {staff.overTime}</CardText>
-                            </div>
-                            <div className="btn">
-                                <Button type="submit" value="submit" color="primary" >Sửa</Button>
-                                <Button type="submit" value="submit" color="danger">Xoá</Button>
                             </div>
                         </CardBody>
                     </Card>

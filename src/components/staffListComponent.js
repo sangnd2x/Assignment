@@ -34,7 +34,7 @@ class StaffList extends Component {
     render() {
         const staff = this.state.staffs.map(staff => {
             return (
-                <div key={staff.id} className={"col-12" + " " + "col-md-" + (12/this.props.column) + " " + "col-lg-" + (12/this.props.column)}>
+                <div key={staff.id} className={"col-12" + " " + "col-md-" + (12 / this.props.column) + " " + "col-lg-" + (12 / this.props.column)}>
                     <div>
                         <Link to={`/staffs/${staff.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
                             <CardBody className="staff">
