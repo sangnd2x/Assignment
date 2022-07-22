@@ -2,13 +2,18 @@ import React, {Component} from "react";
 import { Card, CardBody, CardTitle, CardText, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
+import { motion } from "framer-motion";
 
 class Departments extends Component {
     
     render() {
         const departments = this.props.departments.map(dept => {
             return (
-                <div key={dept.id} className={"col-12" + " " + "col-md-" + (12 / this.props.column) + " " + "col-lg-" + (12 / this.props.column)}>
+                <motion.div
+                    initial={{ x: 50}}
+                    animate={{ x: 0 }}
+                    transition={{ ease: "easeOut", duration: 1 }}
+                    key={dept.id} className={"col-12" + " " + "col-md-" + (12 / this.props.column) + " " + "col-lg-" + (12 / this.props.column)}>
                     <Link to={`/departments/${dept.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
                         <Card className="dept">
                             <div className={`${dept.icon}, dept-icon`}></div>
@@ -18,7 +23,7 @@ class Departments extends Component {
                             </CardBody>
                         </Card>
                     </Link>
-                </div>
+                </motion.div>
             );
         });
 

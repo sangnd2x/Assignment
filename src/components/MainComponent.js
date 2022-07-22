@@ -9,7 +9,6 @@ import DeptStaffs from './DepartmentsWithIdComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStaffs, fetchDepartments, fetchSalaries, postStaff, deleteStaff, updateStaff } from '../actions/ActionsCreator';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const mapStateToProps = state => {
     return {

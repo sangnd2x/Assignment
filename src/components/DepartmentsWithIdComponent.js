@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem} from "reactstrap"
 import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 class DeptStaffs extends Component {
     constructor(props) {
@@ -59,9 +60,13 @@ class DeptStaffs extends Component {
                             <h3>{dept.name}</h3>
                         </div>
                     </div>
-                    <div className="row">
+                    <motion.div
+                        initial={{ y: 50}}
+                        animate={{ y: 0 }}
+                        transition={{ ease: "easeOut", duration: 1 }}
+                        className="row">
                         {staffs}
-                    </div>
+                    </motion.div>
                 </div>
             );
         }

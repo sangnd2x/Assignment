@@ -3,6 +3,7 @@ import { CardBody, CardImg, Breadcrumb, BreadcrumbItem, CardText, Form, Input, B
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
 import AddNewStaff from "./AddNewStaffComponent";
+import { motion } from "framer-motion";
 
 class StaffList extends Component {
     constructor(props) {
@@ -34,7 +35,11 @@ class StaffList extends Component {
     render() {
         const staff = this.state.staffs.map(staff => {
             return (
-                <div key={staff.id} className={"col-12" + " " + "col-md-" + (12 / this.props.column) + " " + "col-lg-" + (12 / this.props.column)}>
+                <motion.div
+                    initial={{ x: -50}}
+                    animate={{ x: 0 }}
+                    transition={{ ease: "easeOut", duration: 1 }}
+                    key={staff.id} className={"col-12" + " " + "col-md-" + (12 / this.props.column) + " " + "col-lg-" + (12 / this.props.column)}>
                     <div>
                         <Link to={`/staffs/${staff.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
                             <CardBody className="staff">
@@ -43,7 +48,7 @@ class StaffList extends Component {
                             </CardBody>
                         </Link>
                     </div>
-                </div>
+                </motion.div>
             )
         });
         

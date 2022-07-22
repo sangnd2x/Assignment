@@ -2,13 +2,18 @@ import React, { Component } from "react";
 import { CardBody, CardTitle, Breadcrumb, BreadcrumbItem, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
+import { motion } from "framer-motion";
 
 class Salary extends Component {
 
     render() {
         const staff = this.props.salaries.map(staff => {
             return (
-                <div key={staff.id} className={"col-12" + " " + "col-md-" + (12/this.props.column) + " " + "col-lg-" + (12/this.props.column)}>
+                <motion.div
+                    initial={{ x: 50}}
+                    animate={{ x: 0 }}
+                    transition={{ ease: "easeOut", duration: 1 }}
+                    key={staff.id} className={"col-12" + " " + "col-md-" + (12 / this.props.column) + " " + "col-lg-" + (12 / this.props.column)}>
                     <div >
                         <Link to={`/staffs/${staff.id}`} style={{ textDecoration: "none", color: "#000000", paddingTop: "10px" }}>
                             <CardBody className="staff">
@@ -22,7 +27,7 @@ class Salary extends Component {
                             </CardBody>
                         </Link>
                     </div>
-                </div>
+                </motion.div>
             )
         });
 

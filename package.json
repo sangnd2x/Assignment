@@ -9,6 +9,7 @@
     "css-loader": "^1.0.0",
     "dateformat": "^4.6.3",
     "font-awesome": "4.7.0",
+    "framer-motion": "^6.5.1",
     "prop-types": "15.6.0",
     "react": "^16.14.0npm",
     "react-animation-components": "3.0.0",

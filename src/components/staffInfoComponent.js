@@ -3,6 +3,7 @@ import { Card, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem, Button }
 import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
 import EditStaff from "./EditStaffComponent";
+import { motion } from "framer-motion";
 
 class StaffInfo extends Component{
     constructor(props) {
@@ -50,7 +51,11 @@ class StaffInfo extends Component{
                             <h3>{staff.name}</h3>
                         </div>
                     </div>
-                    <div className="row">
+                    <motion.div
+                        initial={{ y: 50}}
+                        animate={{ y: 0 }}
+                        transition={{ ease: "easeOut", duration: 1 }}
+                        className="row">
                         <Card className="col-12 col-md-12 col-lg-12">
                             <CardBody className="row">
                                 <div className="col-lg-3 col-md-4 col-12">
@@ -78,7 +83,7 @@ class StaffInfo extends Component{
                                 </div>
                             </CardBody>
                         </Card>
-                    </div>
+                    </motion.div>
                 </div>
             );
         }
